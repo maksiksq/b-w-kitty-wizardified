@@ -22,7 +22,9 @@ body, html {
     font-family: 'Futura LT Light';
     font-style: normal;
     font-weight: normal;
-    src: local('Futura LT Light'), url('../static/fonts/FuturaLTLight.woff') format('woff');
+
+    /* Intellij error is not real, it won't hurt you */
+    src: local('Futura LT Light'), url('/fonts/FuturaLTLight.woff') format('woff');
 }
 
 h1, h2 {

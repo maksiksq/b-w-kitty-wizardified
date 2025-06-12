@@ -28,5 +28,8 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"svelte-fa": "^4.0.4"
 	}
 }

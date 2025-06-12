@@ -1,34 +1,34 @@
 <script lang="ts">
-    import Lightbox from "$lib/components/Lightbox.svelte";
-    import Settings from "$lib/components/Settings.svelte";
-    import Dockbar from "$lib/components/Dockbar.svelte";
+	import Lightbox from '$lib/components/Lightbox.svelte';
+	import Settings from '$lib/components/Settings.svelte';
+	import Dockbar from '$lib/components/Dockbar.svelte';
 
-    import '../global.css';
+	import '../global.css';
 
-    const time: Date = new Date();
+	const time: Date = new Date();
 
-    const showLightbox: boolean = false;
+	const showLightbox: boolean = false;
 
-    let welcome = $state('お帰りなさい');
+	let welcome = $state('お帰りなさい');
 </script>
 
-<Lightbox showLightbox={showLightbox}/>
+<Lightbox showLightbox={showLightbox} />
 <main class="main-wrapper">
-    <div class="h-text">
-        <h1>{welcome}</h1>
-    </div>
-    <Dockbar/>
-    <div class="pic-wrap">
-        <div class="pic-cover">
-            <img src="/img/head-pic.png" alt="trippy cute cat"/>
-        </div>
-    </div>
+	<div class="h-text">
+		<h1>{welcome}</h1>
+	</div>
+	<Dockbar />
+	<div class="pic-wrap">
+		<div class="pic-cover">
+			<img src="/img/head-pic.png" alt="trippy cute cat" />
+		</div>
+	</div>
 
 
-    <div class="time">
-        <h2>{ time.toLocaleTimeString("de-De").slice(0, 5) }</h2>
-    </div>
-    <!--    <Searchbar/>-->
+	<div class="time">
+		<h2>{ time.toLocaleTimeString("de-De").slice(0, 5) }</h2>
+	</div>
+	<!--    <Searchbar/>-->
 </main>
 
 
@@ -36,8 +36,6 @@
     .main-wrapper {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-content: center;
         align-items: center;
 
         height: 100%;
@@ -50,7 +48,8 @@
         flex-direction: row;
         justify-content: center;
 
-        margin-top: 1.6vw;
+        margin-top: 3.2vw;
+
         & h1 {
             font-size: 20pt;
             border: 1px solid rgba(200, 50, 50, 0.3);
@@ -64,6 +63,7 @@
     .pic-wrap {
         margin-top: 1.87vw;
         position: relative;
+
         & .pic-cover {
             & img {
                 position: relative;
