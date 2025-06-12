@@ -1,7 +1,9 @@
 <script lang="ts">
-    import Lightbox from "$lib/Lightbox.svelte";
-    import Settings from "$lib/Settings.svelte";
-    import Dockbar from "$lib/Dockbar.svelte";
+    import Lightbox from "$lib/components/Lightbox.svelte";
+    import Settings from "$lib/components/Settings.svelte";
+    import Dockbar from "$lib/components/Dockbar.svelte";
+
+    import '../global.css';
 
     const time: Date = new Date();
 
@@ -11,7 +13,6 @@
 </script>
 
 <Lightbox showLightbox={showLightbox}/>
-<Settings/>
 <main class="main-wrapper">
     <div class="h-text">
         <h1>{welcome}</h1>
@@ -32,41 +33,6 @@
 
 
 <style>
-    :global {
-        * {
-            font-family: Comfortaa, sans-serif;
-            color: #fff;
-
-            margin: 0;
-            padding: 0;
-        }
-
-        body, html {
-            overflow: hidden;
-            background-color: #2e2e2e;
-
-            height: 100%;
-            width: 100%;
-        }
-
-        ::selection {
-            background: #8a02b5;
-        }
-
-        @font-face {
-            font-family: 'Futura LT Light';
-            font-style: normal;
-            font-weight: normal;
-            src: local('Futura LT Light'), url('/fonts/FuturaLTLight.woff') format('woff');
-        }
-
-        h1, h2 {
-            font-family: 'Futura LT Light', serif;
-        }
-    }
-
-    /* not global */
-
     .main-wrapper {
         display: flex;
         flex-direction: column;
