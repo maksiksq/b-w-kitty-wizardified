@@ -86,8 +86,6 @@
             z-index: 101;
         }
     }
-
-
     .time {
         display: flex;
         flex-direction: row;
