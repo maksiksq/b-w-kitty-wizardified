@@ -13,16 +13,19 @@
 <Lightbox showLightbox={showLightbox}/>
 <Settings/>
 <main class="main-wrapper">
-    <div>
-        <div class="h-text">
-            <h1>{welcome}</h1>
+    <div class="h-text">
+        <h1>{welcome}</h1>
+    </div>
+    <Dockbar/>
+    <div class="pic-wrap">
+        <div class="pic-cover">
+            <img src="/img/head-pic.png" alt="trippy cute cat"/>
         </div>
-        <div class="pic-cover"></div>
-        <Dockbar/>
-        <img src="/img/head-pic.png" alt="trippy cute cat"/>
-        <div class="time">
-            <h2>{ time.toLocaleTimeString("de-De").slice(0, 5) }</h2>
-        </div>
+    </div>
+
+
+    <div class="time">
+        <h2>{ time.toLocaleTimeString("de-De").slice(0, 5) }</h2>
     </div>
     <!--    <Searchbar/>-->
 </main>
@@ -57,22 +60,38 @@
         justify-content: center;
         align-content: center;
         align-items: center;
+
         height: 100%;
         width: 100%;
         z-index: -1;
-    }
 
-    .main-wrapper {
-        & div {
-            & img {
-                position: relative;
-                height: 550px;
-                width: 550px;
-                z-index: 100;
+        & .pic-wrap {
+            position: relative;
+            & .pic-cover {
+                & img {
+                    position: relative;
+                    height: 28.6vw;
+                    width: 28.6vw;
+                    z-index: 100;
 
-                border: 1px solid #ffffff;
+                    border: 1px solid #ffffff;
+                }
+            }
+
+            & .pic-cover::after {
+                content: " ";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 28.6vw;
+                width: 28.6vw;
+                background-color: #2e2e2e;
+                opacity: 0.3;
+                z-index: 101;
             }
         }
+
+
     }
 
     .h-text {
@@ -105,7 +124,6 @@
 
         }
     }
-
 
 
 </style>
