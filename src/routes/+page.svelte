@@ -10,7 +10,7 @@
     let welcome = $state('JUST CARRY ON');
 </script>
 
-<Lightbox showLightbox={showLightbox} />
+<Lightbox showLightbox={showLightbox}/>
 <Settings/>
 <main class="main-wrapper">
     <div>
@@ -19,7 +19,7 @@
         </div>
         <div class="pic-cover"></div>
         <Dockbar/>
-        <img src="@/assets/pic.png" alt="beans"/>
+        <img src="/img/head-pic.png" alt="trippy cute cat"/>
         <div class="time">
             <h2>{ time.toLocaleTimeString("de-De").slice(0, 5) }</h2>
         </div>
@@ -62,13 +62,17 @@
         z-index: -1;
     }
 
-    .main-wrapper > div > img {
-        position: relative;
-        height: 550px;
-        width: 550px;
-        z-index: 100;
+    .main-wrapper {
+        & div {
+            & img {
+                position: relative;
+                height: 550px;
+                width: 550px;
+                z-index: 100;
 
-        border: 1px solid #ffffff;
+                border: 1px solid #ffffff;
+            }
+        }
     }
 
     .h-text {
@@ -101,5 +105,7 @@
 
         }
     }
+
+
 
 </style>
