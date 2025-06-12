@@ -1,9 +1,12 @@
+<script lang="ts">
+    let { showLightbox } = $props();
+</script>
 
-
-<div v-if="isLightbox" class="lightbox">
+{#if showLightbox}
+<div class="lightbox">
     <button>
         piu
-        <svg @click.prevent="isLightbox.value=false" aria-hidden="true" focusable="false" data-prefix="fas"
+        <svg onclick={() => {showLightbox=false}} aria-hidden="true" focusable="false" data-prefix="fas"
              data-icon="times" class="svg-inline--fa fa-times fa-w-11 " role="img" xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 352 512">
             <path fill="currentColor"
@@ -11,6 +14,7 @@
         </svg>
     </button>
 </div>
+{/if}
 
 <style>
     .lightbox {
