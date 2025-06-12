@@ -84,10 +84,10 @@
         flex-direction: row;
         justify-content: center;
 
-        margin-top: 3.2vw;
+        margin-top: 1.6vw;
         & h1 {
             font-size: 20pt;
-            border: 1px solid aqua;
+            border: 1px solid rgba(200, 50, 50, 0.3);
             border-radius: 5px;
             padding: 0 20px 0 35px;
             letter-spacing: 15px;
@@ -101,11 +101,9 @@
         & .pic-cover {
             & img {
                 position: relative;
-                height: 28.6vw;
-                width: 28.6vw;
+                height: 29.4vw;
+                width: 29.4vw;
                 z-index: 100;
-
-                border: 1px solid #ffffff;
             }
         }
 
@@ -114,8 +112,9 @@
             position: absolute;
             top: 0;
             left: 0;
-            height: 28.6vw;
-            width: 28.6vw;
+            height: 29.4vw;
+            width: 29.4vw;
+
             background-color: #2e2e2e;
             opacity: 0.3;
             z-index: 101;
@@ -129,15 +128,14 @@
         justify-content: center;
         font-size: 40px;
         letter-spacing: 15px;
+        margin-top: 1.5vw;
 
         & h2 {
-            padding: 3px 2px 3px 2px;
-            border: aqua solid 1px;
+            padding: 0 20px 0 35px;
+            border: 1px solid rgba(200, 50, 50, 0.3);
             border-radius: 5px;
-            margin-top: 3vw;
 
+            font-size: 40px;
         }
     }
-
-
 </style>
