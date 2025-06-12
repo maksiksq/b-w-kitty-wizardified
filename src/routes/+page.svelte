@@ -7,7 +7,7 @@
 
     const showLightbox: boolean = false;
 
-    let welcome = $state('JUST CARRY ON');
+    let welcome = $state('お帰りなさい');
 </script>
 
 <Lightbox showLightbox={showLightbox}/>
@@ -52,7 +52,20 @@
         ::selection {
             background: #8a02b5;
         }
+
+        @font-face {
+            font-family: 'Futura LT Light';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Futura LT Light'), url('/fonts/FuturaLTLight.woff') format('woff');
+        }
+
+        h1, h2 {
+            font-family: 'Futura LT Light', serif;
+        }
     }
+
+    /* not global */
 
     .main-wrapper {
         display: flex;
@@ -64,34 +77,6 @@
         height: 100%;
         width: 100%;
         z-index: -1;
-
-        & .pic-wrap {
-            position: relative;
-            & .pic-cover {
-                & img {
-                    position: relative;
-                    height: 28.6vw;
-                    width: 28.6vw;
-                    z-index: 100;
-
-                    border: 1px solid #ffffff;
-                }
-            }
-
-            & .pic-cover::after {
-                content: " ";
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 28.6vw;
-                width: 28.6vw;
-                background-color: #2e2e2e;
-                opacity: 0.3;
-                z-index: 101;
-            }
-        }
-
-
     }
 
     .h-text {
@@ -99,15 +84,44 @@
         flex-direction: row;
         justify-content: center;
 
+        margin-top: 3.2vw;
         & h1 {
-            padding: 6px 4px 6px 4px;
-            border: aqua solid 1px;
+            font-size: 20pt;
+            border: 1px solid aqua;
             border-radius: 5px;
-            margin-bottom: 3vw;
-            margin-top: 4vw;
+            padding: 0 20px 0 35px;
+            letter-spacing: 15px;
         }
 
     }
+
+    .pic-wrap {
+        margin-top: 1.87vw;
+        position: relative;
+        & .pic-cover {
+            & img {
+                position: relative;
+                height: 28.6vw;
+                width: 28.6vw;
+                z-index: 100;
+
+                border: 1px solid #ffffff;
+            }
+        }
+
+        & .pic-cover::after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 28.6vw;
+            width: 28.6vw;
+            background-color: #2e2e2e;
+            opacity: 0.3;
+            z-index: 101;
+        }
+    }
+
 
     .time {
         display: flex;
