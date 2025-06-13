@@ -1,20 +1,21 @@
 <script lang="ts">
+	import Fa from 'svelte-fa'
+
+	import { faPaintRoller, faTimes } from '@fortawesome/free-solid-svg-icons'
+
 	let { showLightbox } = $props();
 </script>
 
 {#if showLightbox}
-	<div class="lightbox">
-		<svg onclick={() => {showLightbox=false}} aria-hidden="true" focusable="false" data-prefix="fas"
-				 data-icon="times" class="svg-inline--fa fa-times fa-w-11 " role="img"
-				 xmlns="http://www.w3.org/2000/svg"
-				 viewBox="0 0 352 512">
-			<path fill="currentColor"
-						d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
-		</svg>
+	<div class="lightbox" role="presentation" onclick={() => {showLightbox = false}}>
+		<button class="cross-wrap" onclick={() => {showLightbox=false}}>
+			<Fa icon={faTimes} class="cross"></Fa>
+		</button>
 	</div>
 {/if}
+<!-- -->
 <button type="button" class="settings-button" onclick={() => {showLightbox = true}}>
-	redacted
+	<Fa icon={faPaintRoller} color="#2e2e2e"></Fa>
 </button>
 
 <style>
@@ -33,48 +34,54 @@
         border-radius: 0;
         z-index: 9999;
 
-        & svg {
+				& .cross-wrap {
+						all: unset;
+
             top: 1vw;
-            right: 3vw;
+            right: 1vw;
 
             position: absolute;
             z-index: 10000;
-            width: 2vw;
-            height: 2vw;
+
 
             cursor: pointer;
 
-						opacity: 0.3;
-            transition: opacity 0.3s;
+						/* Global because funny library issue */
+						:global(.cross) {
+                opacity: 0.3;
+                transition: opacity 0.3s;
+                width: 2vw;
+                height: 2vw;
 
-						&:hover {
-                opacity: 1;
+                &:hover {
+                    opacity: 1;
+                }
 						}
         }
-
-
     }
+
 
     .settings-button {
         all: unset;
 
         position: absolute;
         top: 1.3vw;
-        transform: translateX(calc(100vw - 2vw));
+        transform: translateX(calc(100vw - 1.3vw));
 
-        padding: 10px 15px 10px 30px;
+        padding: 10px 15px 8px 30px;
 
-        height: 3.25vw;
-        width: 2vw;
         background-color: rgba(50, 200, 150, 0.3);
 
-        transition: all 0.3s ease-in-out;
-        border-radius: 8px;
+        transition: all 0.3s;
+        border-radius: 5px;
 
         opacity: 0.3;
 
+        font-size: 20px;
+
         &:hover {
-            transform: translateX(calc(100vw - 4vw));
+            padding: 10px 30px 10px 15px;
+            transform: translateX(calc(100vw - 3.7vw));
             cursor: pointer;
             opacity: 1;
         }
