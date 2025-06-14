@@ -52,12 +52,57 @@
 	];
 </script>
 
-{#each bookmarks as bookmark}
-	<a href={bookmark.url}>
-		<Fa icon={
+<div class="dockbar">
+	{#each bookmarks as bookmark}
+		<a href={bookmark.url}>
+			<Fa icon={
                     (fas[bookmark.icon] !== undefined)
                     ? fas[bookmark.icon]
                     : fab[bookmark.icon]
-                } />
-	</a>
-{/each}
+                }
+					color="#2e2e2e"
+			/>
+		</a>
+	{/each}
+</div>
+
+<style>
+    .dockbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+
+        z-index: 1;
+
+        a {
+            position: relative;
+            height: 60px;
+        }
+
+        :global {
+            svg {
+                position: absolute;
+                width: 70px !important;
+                font-size: 40px;
+                padding: 5px 10px 5px 10px;
+                border-radius: 5px 0 0 5px;
+                background-color: rgba(50, 200, 150, 0.3);
+                transition: .5s;
+                opacity: 0.5;
+                left: -20px;
+
+                &:hover {
+                    left: -70px;
+                    opacity: 1;
+                    padding: 5px 20px 5px 0;
+                }
+            }
+        }
+    }
+</style>

@@ -32,8 +32,8 @@
 	<div class="h-text">
 		<h1>{welcome}</h1>
 	</div>
-	<Dockbar />
 	<div class="pic-wrap">
+		<Dockbar />
 		<div class="pic-cover">
 			<img src="/img/head-pic.png" alt="trippy cute cat" />
 		</div>
