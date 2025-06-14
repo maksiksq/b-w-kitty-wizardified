@@ -7,7 +7,7 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	const time: Date = new Date();
-	let timeDisplay: string = $state('');
+	let timeDisplay: string = $state(time.toLocaleTimeString("de-De").slice(0, 5));
 
 	const showLightbox: boolean = false;
 
