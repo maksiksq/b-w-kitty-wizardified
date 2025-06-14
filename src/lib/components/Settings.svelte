@@ -7,7 +7,7 @@ import Colorpick from '$lib/components/Colorpick.svelte';
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
 		<Colorpick value="bg-color"/>
-		<Colorpick value="default-color"/>
+		<Colorpick value="text-color"/>
 		<Colorpick value="accent-color"/>
 		<Colorpick value="accent-color2"/>
 	</div>
