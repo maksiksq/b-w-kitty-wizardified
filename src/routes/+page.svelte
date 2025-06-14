@@ -6,7 +6,7 @@
 	import '../global.css';
 	import { onDestroy, onMount } from 'svelte';
 
-	const time: Date = new Date();
+	let time: Date = new Date();
 	let timeDisplay: string = $state(time.toLocaleTimeString("de-De").slice(0, 5));
 
 	const showLightbox: boolean = false;
@@ -15,6 +15,7 @@
 
 	onMount(() => {
 		const interval = setInterval(() => {
+			time = new Date();
 			timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)},
 			1000);
 
