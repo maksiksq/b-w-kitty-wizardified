@@ -25,29 +25,42 @@
 	}
 
 	// converters
-	const rgbaToHex = (rgba: string) => '#' + rgba.match(/\d+(\.\d+)?/g)?.map((x, i) => i < 3 ? (+x).toString(16).padStart(2, '0') : Math.round(+x * 255).toString(16).padStart(2, '0')).join('');
+	const cssRgbaToHsv = (rgba: string) => {
+		const [r, g, b, a = 1] = rgba.match(/\d+(\.\d+)?/g)?.map(Number).map((v, i) => i < 3 ? v / 255 : v);
+		const max = Math.max(r, g, b), min = Math.min(r, g, b);
+		const d = max - min;
+		const h = d === 0 ? 0 :
+			max === r ? 60 * (((g - b) / d) % 6) :
+				max === g ? 60 * (((b - r) / d) + 2) :
+					60 * (((r - g) / d) + 4);
+		const s = max === 0 ? 0 : d / max;
+		const v = max;
+		return {
+			h: Math.round((h + 360) % 360),
+			s: Math.round(s * 100),
+			v: Math.round(v * 100),
+			a: a
+		};
+	};
 	const rgbaArrToRgbaString = ({r, g, b, a}: Trgba) => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
 
 
 	let { value } = $props();
 
+	// the library only actually cares for the hsv value luckily for me
+
 	let hex = $state(
-		localStorage.getItem(value) || rgbaToHex(defaultColors[value])
+		'#000000'
 	);
 
 	let rgb = $state({
-		"r": 46,
-		"g": 46,
-		"b": 46,
+		"r": 0,
+		"g": 0,
+		"b": 0,
 		"a": 1
 	});
 
-	let hsv = $state({
-		"h": 0,
-		"s": 0,
-		"v": 18,
-		"a": 1
-	});
+	let hsv = $state(cssRgbaToHsv(localStorage.getItem(value) || defaultColors[value]));
 
 	let color = $state("w");
 
@@ -70,8 +83,6 @@
 		changeColor = (key: string, color: string) => {
 			root.style.setProperty("--" + key, color)
 			localStorage.setItem(key, color)
-
-			console.log(color)
 		}
 	}
 </script>
