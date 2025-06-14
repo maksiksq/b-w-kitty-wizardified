@@ -1,46 +1,15 @@
 <script lang="ts">
 import ColorPicker from 'svelte-awesome-color-picker';
-
-let { changeColor } = $props();
-
-let hex = $state("#000000");
-
-let rgb = $state({
-	"r": 46,
-	"g": 46,
-	"b": 46,
-	"a": 1
-});
-
-let hsv = $state({
-	"h": 0,
-	"s": 0,
-	"v": 18,
-	"a": 1
-});
-
-let color = $state("w");
+import Colorpick from '$lib/components/Colorpick.svelte';
 
 </script>
 
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
-		<ColorPicker
-			bind:rgb
-			bind:hsv
-			bind:hex
-			bind:color
-			sliderDirection="horizontal"
-			position="responsive"
-		/>
-		<ColorPicker
-			bind:rgb
-			bind:hsv
-			bind:hex
-			bind:color
-			sliderDirection="horizontal"
-			position="responsive"
-		/>
+		<Colorpick value="bg-color"/>
+		<Colorpick value="default-color"/>
+		<Colorpick value="accent-color"/>
+		<Colorpick value="accent-color2"/>
 	</div>
 </div>
 
