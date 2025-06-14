@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Lightbox from '$lib/components/Lightbox.svelte';
-	import Settings from '$lib/components/Settings.svelte';
 	import Dockbar from '$lib/components/Dockbar.svelte';
 
 	import '../global.css';

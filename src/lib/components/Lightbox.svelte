@@ -2,6 +2,7 @@
 	import Fa from 'svelte-fa'
 
 	import { faPaintRoller, faTimes } from '@fortawesome/free-solid-svg-icons'
+	import Settings from '$lib/components/Settings.svelte';
 
 	let { showLightbox } = $props();
 </script>
@@ -11,7 +12,10 @@
 		<button class="cross-wrap" onclick={() => {showLightbox=false}}>
 			<Fa icon={faTimes} class="cross"></Fa>
 		</button>
+
+		<Settings />
 	</div>
+
 {/if}
 <!-- -->
 <button type="button" class="settings-button" onclick={() => {showLightbox = true}}>
@@ -26,13 +30,19 @@
 
         opacity: 0.95;
 
-        height: 100vw;
         width: 100vw;
+        height: 100vh;
+
         background-color: rgba(46, 46, 46, 1);
 
         transition: all 0.5s ease-in-out;
         border-radius: 0;
         z-index: 9999;
+
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
 
 				& .cross-wrap {
 						all: unset;
