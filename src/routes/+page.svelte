@@ -6,14 +6,15 @@
 	import '../global.css';
 	import { onMount } from 'svelte';
 
-	let time: Date = new Date();
+	const time: Date = new Date();
+	let timeDisplay: string = $state('');
 
 	const showLightbox: boolean = false;
 
 	let welcome = $state('お帰りなさい');
 
 	onMount(() => {
-		console.log("unleash");
+		setInterval(timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5), 60000)
 	})
 </script>
 
@@ -31,7 +32,7 @@
 
 
 	<div class="time">
-		<h2>{ time.toLocaleTimeString("de-De").slice(0, 5) }</h2>
+		<h2>{ timeDisplay }</h2>
 	</div>
 	<!--    <Searchbar/>-->
 </main>
