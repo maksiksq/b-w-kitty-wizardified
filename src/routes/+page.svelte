@@ -4,7 +4,7 @@
 	import Dockbar from '$lib/components/Dockbar.svelte';
 
 	import '../global.css';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	const time: Date = new Date();
 	let timeDisplay: string = $state('');
@@ -14,7 +14,15 @@
 	let welcome = $state('お帰りなさい');
 
 	onMount(() => {
-		setInterval(timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5), 60000)
+		const interval = setInterval(() => {
+			timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)},
+			1000);
+
+
+		onDestroy(() => {
+			clearInterval(interval);
+		})
+
 	})
 </script>
 
