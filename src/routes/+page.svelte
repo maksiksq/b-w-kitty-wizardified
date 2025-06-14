@@ -32,6 +32,7 @@
 </script>
 
 <Lightbox {showLightbox} />
+<div style="background-color: var(--bg-color)">aaaaaaa</div>
 <main class="main-wrapper">
 	<div class="h-text">
 		<h1>{welcome}</h1>
