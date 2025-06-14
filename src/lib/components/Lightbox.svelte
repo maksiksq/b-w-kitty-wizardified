@@ -1,20 +1,21 @@
 <script lang="ts">
-	import Fa from 'svelte-fa'
+	import Fa from 'svelte-fa';
 
-	import { faPaintRoller, faTimes } from '@fortawesome/free-solid-svg-icons'
+	import { faPaintRoller, faTimes } from '@fortawesome/free-solid-svg-icons';
 	import Settings from '$lib/components/Settings.svelte';
 
-	let { showLightbox } = $props();
+	let { showLightbox, changeColor } = $props();
+	changeColor();
 </script>
 
 {#if showLightbox}
-	<div class="lightbox" role="presentation" onclick={() => {showLightbox = false}}>
-		<button class="cross-wrap" onclick={() => {showLightbox=false}}>
-			<Fa icon={faTimes} class="cross"></Fa>
-		</button>
 
-		<Settings />
-	</div>
+	<div class="lightbox" role="presentation" onclick={() => {showLightbox = false}}></div>
+	<button class="cross-wrap" onclick={() => {showLightbox=false}}>
+		<Fa icon={faTimes} class="cross"></Fa>
+	</button>
+	<Settings {changeColor} />
+
 
 {/if}
 <!-- -->
@@ -38,34 +39,30 @@
         transition: all 0.5s ease-in-out;
         border-radius: 0;
         z-index: 9999;
+    }
 
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: center;
+    .cross-wrap {
+        all: unset;
 
-				& .cross-wrap {
-						all: unset;
+        top: 1vw;
+        right: 1vw;
 
-            top: 1vw;
-            right: 1vw;
-
-            position: absolute;
-            z-index: 10000;
+        position: absolute;
+        z-index: 10001;
 
 
-            cursor: pointer;
+        cursor: pointer;
 
-						:global(.cross) {
-                opacity: 0.3;
-                transition: opacity 0.3s;
-                width: 2vw;
-                height: 2vw;
+        :global(.cross) {
+            opacity: 0.3;
+            transition: opacity 0.3s;
+            width: 2vw;
+            height: 2vw;
 
-                &:hover {
-                    opacity: 1;
-                }
-						}
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 

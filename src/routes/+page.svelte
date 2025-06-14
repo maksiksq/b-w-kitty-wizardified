@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Lightbox from '$lib/components/Lightbox.svelte';
 	import Dockbar from '$lib/components/Dockbar.svelte';
+	import { browser } from '$app/environment';
 
 	import '../global.css';
 	import { onDestroy, onMount } from 'svelte';
@@ -12,21 +13,64 @@
 
 	let welcome = $state('お帰りなさい');
 
+	type colors = {
+		[key: string]: string
+		'bg-color': string,
+		'default-color': string,
+		'accent-color': string,
+		'accent-color2': string,
+	}
+	const defaultColors: colors = {
+		'bg-color': "rgba(46,46,46,255)",
+		'default-color': "rgba(230,230,230,255)",
+		'accent-color': "rgba(50,200,150,.3)",
+		'accent-color2': "rgba(200, 50, 50, 0.3)",
+	}
+
+	let changeColor = $state((key: string, color: string) => {
+		// initializer for ssr
+	});
+
+	if (browser) {
+		// saving and updating css variables
+		let root = document.documentElement;
+		Object.keys(defaultColors).forEach(key => {
+			let c = localStorage.getItem(key)
+			if (c) {
+				root.style.setProperty("--" + key, c)
+			}
+		});
+
+		changeColor = (key: string, color: string) => {
+			root.style.setProperty("--" + key, color)
+			localStorage.setItem(key, color)
+
+			console.log("ye")
+		}
+	}
+
+
+
+
 	onMount(() => {
+		// live-ish timer update
 		const interval = setInterval(() => {
 			time = new Date();
 			timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)},
 			1000);
 
-
+		// void
 		onDestroy(() => {
 			clearInterval(interval);
 		})
 
 	})
+
+
+
 </script>
 
-<Lightbox showLightbox={showLightbox} />
+<Lightbox {showLightbox} {changeColor} />
 <main class="main-wrapper">
 	<div class="h-text">
 		<h1>{welcome}</h1>
