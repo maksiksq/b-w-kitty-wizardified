@@ -3,12 +3,12 @@
 	import { fas } from '@fortawesome/free-solid-svg-icons';
 	import { fab } from '@fortawesome/free-brands-svg-icons';
 
-	interface bookmarkI {
+	interface Ibookmark {
 		url: string,
 		icon: string,
 	}
 
-	let bookmarks: bookmarkI[] = [
+	let bookmarks: Ibookmark[] = [
 		{
 			url: 'https://mail.google.com/mail/u/5/#inbox',
 			icon: 'faEnvelope'
