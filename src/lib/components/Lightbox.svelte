@@ -46,7 +46,6 @@
 
             cursor: pointer;
 
-						/* Global because funny library issue */
 						:global(.cross) {
                 opacity: 0.3;
                 transition: opacity 0.3s;
@@ -68,7 +67,7 @@
         top: 1.3vw;
         transform: translateX(calc(100vw - 1.3vw));
 
-        padding: 10px 15px 8px 30px;
+        padding: 10px 15px 6px 30px;
 
         background-color: rgba(50, 200, 150, 0.3);
 
@@ -80,8 +79,8 @@
         font-size: 20px;
 
         &:hover {
-            padding: 10px 30px 10px 15px;
-            transform: translateX(calc(100vw - 3.7vw));
+            padding: 10px 30px 6px 15px;
+            transform: translateX(calc(100vw - 3.3vw));
             cursor: pointer;
             opacity: 1;
         }

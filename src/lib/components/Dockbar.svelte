@@ -88,7 +88,7 @@
         :global {
             svg {
                 position: absolute;
-                width: 70px !important;
+                width: 70px;
                 font-size: 40px;
                 padding: 5px 10px 5px 10px;
                 border-radius: 5px 0 0 5px;
