@@ -4,12 +4,17 @@
 	import Dockbar from '$lib/components/Dockbar.svelte';
 
 	import '../global.css';
+	import { onMount } from 'svelte';
 
-	const time: Date = new Date();
+	let time: Date = new Date();
 
 	const showLightbox: boolean = false;
 
 	let welcome = $state('お帰りなさい');
+
+	onMount(() => {
+		console.log("unleash");
+	})
 </script>
 
 <Lightbox showLightbox={showLightbox} />
