@@ -1,0 +1,1 @@
+[ ] - make icon color a selectable or auto
