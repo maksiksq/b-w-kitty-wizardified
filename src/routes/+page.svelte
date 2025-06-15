@@ -7,7 +7,11 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	let time: Date = new Date();
-	let timeDisplay: string = $state(time.toLocaleTimeString("de-De").slice(0, 5));
+	let timeDisplay: string = "no";
+
+	if (!browser) {
+		timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5);
+	}
 
 	const showLightbox: boolean = false;
 
@@ -17,7 +21,8 @@
 		// live-ish timer update
 		const interval = setInterval(() => {
 			time = new Date();
-			timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)},
+			// timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)
+			},
 			1000);
 
 		// void
