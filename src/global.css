@@ -1,3 +1,14 @@
+/* VARIABLES */
+:root {
+    --bg-color: rgba(46,46,46,1);
+    --text-color: rgba(230,230,230,1);
+    --accent-color: rgba(50,200,150,0.3);
+    --accent-color2: rgba(200, 50, 50, 0.3);
+    --border-radius: 5px;
+    --bg-img: '';
+}
+
+/* GLOBALS */
 * {
     font-family: Comfortaa, sans-serif;
 
@@ -7,6 +18,8 @@
 
 body, html {
     overflow: hidden;
+    background-image: var(--bg-img);
+    background-size: cover;
     background-color: var(--bg-color);
     color: var(--text-color);
 
@@ -36,13 +49,4 @@ h1, h2, h3, p  {
     cursor: move;
     border: solid 1px gray;
     position: absolute;
-}
-
-/* VARIABLES */
-:root {
-    --bg-color: rgba(46,46,46,1);
-    --text-color: rgba(230,230,230,1);
-    --accent-color: rgba(50,200,150,0.3);
-    --accent-color2: rgba(200, 50, 50, 0.3);
-    --border-radius: 5px;
 }

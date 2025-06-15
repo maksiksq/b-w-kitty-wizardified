@@ -5,6 +5,7 @@
 [ ] - save and load settings
 [ ] - text selection color option
 [ ] - replace some effects with oninputs and universalate some things
-[ ] - add image upscaling options
+[ ] - add image upscaling and transparency options
+[ ] - settings button should be draggable too
 
 !!! [ ] DEFAULT BUTTONS!!!!!111!1!!!!!11!!

@@ -36,6 +36,26 @@
 		};
 		reader.readAsDataURL(file);
 	};
+
+	//
+
+	let root = document.documentElement;
+
+	let changeBgImg = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		const file = target.files?.[0];
+		if (!file) return;
+
+		const reader = new FileReader();
+		reader.onload = () => {
+			pic.src = reader.result as string;
+			const url = pic.src;
+
+			root.style.setProperty('--bg-img', `url(${url})`);
+			localStorage.setItem('bg-img', url);
+		};
+		reader.readAsDataURL(file);
+	};
 </script>
 
 <div class="settings-wrap">
@@ -45,12 +65,12 @@
 				<Colorpick {defaultColors} {value} bind:isDarkColor />
 			{/each}
 			<div class="pic-bloc settings-bloc">
-				<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
 				<label for="pic">Custom focal picture (1:1 ideally)</label>
+				<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
 			</div>
 			<div class="bg-img-bloc settings-bloc">
-				<input name="bg-img" type="checkbox" bind:checked={tempOverlay} />
 				<label for="bg-img">Custom background image (16:19 ideally)</label>
+				<input name="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
 			</div>
 			<div class="tint-bloc settings-bloc">
 				<input name="tint" type="checkbox" bind:checked={tempOverlay} />

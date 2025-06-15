@@ -35,6 +35,10 @@
 		}
 	});
 
+	let bg = localStorage.getItem('bg-img');
+	if (bg) {
+		root.style.setProperty('--bg-img', `url(${bg})`);
+	}
 	//
 
 	type TSettings = {
