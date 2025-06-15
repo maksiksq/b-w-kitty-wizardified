@@ -37,6 +37,11 @@
 		reader.readAsDataURL(file);
 	};
 
+	const resetPic = (e: Event): void => {
+		picSrc.val = '/img/head-pic.png';
+		localStorage.setItem('i-pic-src', '/img/head-pic.png');
+	}
+
 	//
 
 	let root = document.documentElement;
@@ -57,7 +62,7 @@
 		reader.readAsDataURL(file);
 	};
 
-	const removeBgImg = (e: Event): void => {
+	const resetBgImg = (e: Event): void => {
 		root.style.setProperty('--bg-img', '');
 		localStorage.setItem('bg-img', '');
 	}
@@ -78,7 +83,7 @@
 					<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
 				</div>
 				<div class="bloc-seg-r">
-					<button>Default</button>
+					<button onclick={resetPic}>Reset</button>
 				</div>
 			</div>
 			<div class="bg-img-bloc settings-bloc">
@@ -87,7 +92,7 @@
 					<input name="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
 				</div>
 				<div class="bloc-seg-r">
-					<button onclick={removeBgImg}>Default</button>
+					<button onclick={resetBgImg}>Reset</button>
 				</div>
 			</div>
 			<div class="tint-bloc settings-bloc">
