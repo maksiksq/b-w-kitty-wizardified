@@ -19,7 +19,7 @@
 	const switchToEditor = (): void => {
 		showEditor.val = !showEditor.val;
 		showLightbox.val = false;
-	}
+	};
 
 	let pic = $state(new Image());
 
@@ -62,24 +62,46 @@
 	<div class="settings-wrap-inner">
 		<section class="settings-bloc-cont">
 			{#each Object.keys(defaultColors) as value}
-				<Colorpick {defaultColors} {value} bind:isDarkColor />
+				<div class="colorpick-bloc settings-bloc">
+					<Colorpick {defaultColors} {value} bind:isDarkColor />
+				</div>
 			{/each}
 			<div class="pic-bloc settings-bloc">
-				<label for="pic">Custom focal picture (1:1 ideally)</label>
-				<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
+				<div class="bloc-seg-l">
+					<label for="pic">Custom focal picture (1:1 ideally)</label>
+					<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
+				</div>
+				<div class="bloc-seg-r">
+					<button>Default</button>
+				</div>
 			</div>
 			<div class="bg-img-bloc settings-bloc">
-				<label for="bg-img">Custom background image (16:19 ideally)</label>
-				<input name="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
+				<div class="bloc-seg-l">
+					<label for="bg-img">Custom background image (16:19 ideally)</label>
+					<input name="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
+				</div>
+				<div class="bloc-seg-r">
+					<button>Default</button>
+				</div>
 			</div>
 			<div class="tint-bloc settings-bloc">
-				<input name="tint" type="checkbox" bind:checked={tempOverlay} />
-				<label for="tint">Image tint</label>
+				<div class="bloc-seg-l">
+					<input name="tint" type="checkbox" bind:checked={tempOverlay} />
+					<label for="tint">Image tint</label>
+				</div>
+				<div class="bloc-seg-r">
+					<button>Default</button>
+				</div>
 			</div>
 			<div class="welcome-bloc settings-bloc">
-				<label for="welcome">Upper text: &nbsp</label>
-				<input name="welcome" type="text" bind:value={settings.welcome}
-							 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
+				<div class="bloc-seg-l">
+					<label for="welcome">Upper text: &nbsp</label>
+					<input name="welcome" type="text" bind:value={settings.welcome}
+								 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
+				</div>
+				<div class="bloc-seg-r">
+					<button>Default</button>
+				</div>
 			</div>
 		</section>
 		<section class="editor-bloc-cont">
@@ -127,44 +149,56 @@
             --cp-input-color: var(--accent-color);
             --cp-button-hover-color: var(--accent-color);
 
-						& section {
+            & section {
                 width: 50%;
-						}
+            }
+
             & .settings-bloc-cont {
                 display: flex;
                 flex-direction: column;
                 gap: 1vw;
 
-								border-right: var(--accent-color2) solid 1px;
+                padding-right: 1vw;
 
-								& .settings-bloc {
+                border-right: var(--accent-color2) solid 1px;
+
+                & .settings-bloc {
                     color: white;
+
+                    display: flex;
+                    flex-direction: row;
+
+										:global {
+                        .bloc-seg-r {
+                            margin-left: auto
+                        }
+										}
                 }
             }
 
-						& .editor-bloc-cont {
-								padding-left: 1%;
+            & .editor-bloc-cont {
+                padding-left: 1%;
 
-								display: flex;
-								align-items: center;
-								justify-content: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
-								& .editor-button {
-										all: unset;
+                & .editor-button {
+                    all: unset;
 
-										cursor: pointer;
+                    cursor: pointer;
 
-										width: 2.5vw;
-										height: 2.5vw;
+                    width: 2.5vw;
+                    height: 2.5vw;
 
-										:global {
+                    :global {
                         svg {
-														width: 100%;
-														height: 100%;
+                            width: 100%;
+                            height: 100%;
                         }
                     }
                 }
-						}
+            }
         }
     }
 

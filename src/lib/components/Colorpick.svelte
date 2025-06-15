@@ -28,7 +28,7 @@
 			a: a
 		};
 	};
-	const rgbaArrToRgbaString = ({ r, g, b, a }: Trgba): string => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
+	const rgbaArrToCssRgbaString = ({ r, g, b, a }: Trgba): string => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
 
 	// the library only actually cares for the hsv value luckily for me
 
@@ -67,20 +67,27 @@
 
 	//
 
-	$effect((): any => {localStorage.setItem('is-dark-color', isDarkColor)});
+	$effect((): any => {
+		localStorage.setItem('is-dark-color', isDarkColor);
+	});
 </script>
 
-<ColorPicker
-	bind:rgb
-	bind:hsv
-	bind:hex
-	bind:color
-	bind:isDark={
+<div class="bloc-seg-l">
+	<ColorPicker
+		bind:rgb
+		bind:hsv
+		bind:hex
+		bind:color
+		bind:isDark={
 	() => isDarkColor,
 	(d) => isDarkColor = value==='accent-color' ? d : isDarkColor
 	}
-	label={label}
-	sliderDirection="horizontal"
-	position="responsive"
-	onInput={() => { changeColor(value, rgbaArrToRgbaString(rgb)); }}
-/>
+		label={label}
+		sliderDirection="horizontal"
+		position="responsive"
+		onInput={() => { changeColor(value, rgbaArrToCssRgbaString(rgb)); }}
+	/>
+</div>
+<div class="bloc-seg-r">
+	<button onclick={() => {hsv=cssRgbaToHsv(defaultColors[value])}}>Default</button>
+</div>
