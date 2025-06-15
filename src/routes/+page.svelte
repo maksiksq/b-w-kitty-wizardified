@@ -8,9 +8,7 @@
 
 	let time: Date = new Date();
 	let timeDisplay: string = $state("00:00");
-	if (browser) {
-		timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5);
-	}
+	timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)
 
 	const showLightbox: boolean = false;
 
