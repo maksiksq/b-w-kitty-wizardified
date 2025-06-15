@@ -41,7 +41,7 @@
 
 	let root = document.documentElement;
 
-	let changeBgImg = (e: Event) => {
+	const changeBgImg = (e: Event): void => {
 		const target = e.target as HTMLInputElement;
 		const file = target.files?.[0];
 		if (!file) return;
@@ -56,6 +56,12 @@
 		};
 		reader.readAsDataURL(file);
 	};
+
+	const removeBgImg = (e: Event): void => {
+		root.style.setProperty('--bg-img', '');
+		localStorage.setItem('bg-img', '');
+	}
+
 </script>
 
 <div class="settings-wrap">
@@ -81,7 +87,7 @@
 					<input name="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
 				</div>
 				<div class="bloc-seg-r">
-					<button>Default</button>
+					<button onclick={removeBgImg}>Default</button>
 				</div>
 			</div>
 			<div class="tint-bloc settings-bloc">
