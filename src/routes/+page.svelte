@@ -4,16 +4,39 @@
 	import { browser } from '$app/environment';
 
 	import '../global.css';
-	import { onDestroy, onMount } from 'svelte';
 	import Clock from '$lib/components/Clock.svelte';
 
 	const showLightbox: boolean = false;
 
 	let welcome = $state('お帰りなさい');
 
+	// saving and updating css variables
+	type TColors = {
+		[key: string]: string
+		'bg-color': string,
+		'text-color': string,
+		'accent-color': string,
+		'accent-color2': string,
+	}
+
+	const defaultColors: TColors = {
+		'bg-color': 'rgba(46,46,46,255)',
+		'text-color': 'rgba(230,230,230,255)',
+		'accent-color': 'rgba(50,200,150,.3)',
+		'accent-color2': 'rgba(200, 50, 50, 0.3)'
+	};
+
+	let root = document.documentElement;
+	Object.keys(defaultColors).forEach(key => {
+		let c = localStorage.getItem(key);
+		if (c) {
+			root.style.setProperty('--' + key, c);
+		}
+	});
+
 </script>
 
-<Lightbox {showLightbox} />
+<Lightbox {showLightbox} {defaultColors} />
 <main class="main-wrapper">
 	<div class="h-text">
 		<h1>{welcome}</h1>
@@ -26,9 +49,7 @@
 	</div>
 
 
-	<Clock>
-
-	</Clock>
+	<Clock />
 	<!--    <Searchbar/>-->
 </main>
 

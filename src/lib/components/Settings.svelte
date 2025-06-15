@@ -2,14 +2,15 @@
 import ColorPicker from 'svelte-awesome-color-picker';
 import Colorpick from '$lib/components/Colorpick.svelte';
 
+const { defaultColors } = $props();
 </script>
 
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
-		<Colorpick value="bg-color"/>
-		<Colorpick value="text-color"/>
-		<Colorpick value="accent-color"/>
-		<Colorpick value="accent-color2"/>
+		<Colorpick {defaultColors} value="bg-color"/>
+		<Colorpick {defaultColors} value="text-color"/>
+		<Colorpick {defaultColors} value="accent-color"/>
+		<Colorpick {defaultColors} value="accent-color2"/>
 	</div>
 </div>
 

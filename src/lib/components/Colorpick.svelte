@@ -2,26 +2,11 @@
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import { browser } from '$app/environment';
 
-	type TColors = {
-		[key: string]: string
-		'bg-color': string,
-		'text-color': string,
-		'accent-color': string,
-		'accent-color2': string,
-	}
-
 	type Trgba = {
 		r: number,
 		g: number,
 		b: number,
 		a: number
-	}
-
-	const defaultColors: TColors = {
-		'bg-color': "rgba(46,46,46,255)",
-		'text-color': "rgba(230,230,230,255)",
-		'accent-color': "rgba(50,200,150,.3)",
-		'accent-color2': "rgba(200, 50, 50, 0.3)",
 	}
 
 	// converters
@@ -42,10 +27,10 @@
 			a: a
 		};
 	};
-	const rgbaArrToRgbaString = ({r, g, b, a}: Trgba) => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
+	const rgbaArrToRgbaString = ({ r, g, b, a }: Trgba) => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
 
 
-	let { value } = $props();
+	let { value, defaultColors } = $props();
 
 	// the library only actually cares for the hsv value luckily for me
 
@@ -54,37 +39,24 @@
 	);
 
 	let rgb = $state({
-		"r": 0,
-		"g": 0,
-		"b": 0,
-		"a": 1
+		'r': 0,
+		'g': 0,
+		'b': 0,
+		'a': 1
 	});
 
 	let hsv = $state(cssRgbaToHsv(localStorage.getItem(value) || defaultColors[value]));
 
-	let color = $state("w");
+	let color = $state('w');
 
 	//
 
-	let changeColor = $state((key: string, color: string) => {
-		// initializer for ssr
-	});
+	let root = document.documentElement;
 
-	if (browser) {
-		// saving and updating css variables
-		let root = document.documentElement;
-		Object.keys(defaultColors).forEach(key => {
-			let c = localStorage.getItem(key)
-			if (c) {
-				root.style.setProperty("--" + key, c)
-			}
-		});
-
-		changeColor = (key: string, color: string) => {
-			root.style.setProperty("--" + key, color)
-			localStorage.setItem(key, color)
-		}
-	}
+	let changeColor = (key: string, color: string) => {
+		root.style.setProperty('--' + key, color);
+		localStorage.setItem(key, color);
+	};
 </script>
 
 <ColorPicker
