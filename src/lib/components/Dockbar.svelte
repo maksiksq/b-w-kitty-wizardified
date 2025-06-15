@@ -3,6 +3,8 @@
 	import { fas } from '@fortawesome/free-solid-svg-icons';
 	import { fab } from '@fortawesome/free-brands-svg-icons';
 
+	let { isDarkColor } = $props();
+
 	interface Ibookmark {
 		url: string,
 		icon: string,
@@ -60,7 +62,7 @@
                     ? fas[bookmark.icon]
                     : fab[bookmark.icon]
                 }
-					color="#2e2e2e"
+					color={isDarkColor ? 'white' : '#2e2e2e'}
 			/>
 		</a>
 	{/each}

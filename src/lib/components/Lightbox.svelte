@@ -4,9 +4,7 @@
 	import { faPaintRoller, faTimes } from '@fortawesome/free-solid-svg-icons';
 	import Settings from '$lib/components/Settings.svelte';
 
-	let { defaultColors, showLightbox=$bindable(false), settings=$bindable(undefined) } = $props();
-
-	let isDarkColor = $state(false);
+	let { defaultColors, showLightbox=$bindable(false), isDarkColor=$bindable(false), settings=$bindable(undefined) } = $props();
 
 </script>
 

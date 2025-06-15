@@ -78,13 +78,17 @@
 			? onSettingsChange(true, 'overlay')
 			: onSettingsChange(false, 'overlay'))
 		);
+
+	//
+
+	let isDarkColor = $state((localStorage.getItem('is-dark-color') === 'true') || false);
 </script>
 
-<Lightbox {defaultColors} bind:showLightbox bind:settings />
+<Lightbox {defaultColors} bind:showLightbox bind:isDarkColor bind:settings />
 <main class="main-wrapper">
 	<MainHeader {welcome} />
 	<div class="pic-wrap">
-		<Dockbar />
+		<Dockbar {isDarkColor} />
 		<div class="pic-cover {overlay ? 'show-overlay' : ''}">
 			<img src="/img/head-pic.png" alt="trippy cute cat" />
 		</div>

@@ -67,8 +67,7 @@
 
 	//
 
-	let isDark = $state();
-
+	$effect((): any => {localStorage.setItem('is-dark-color', isDarkColor)});
 </script>
 
 <ColorPicker
