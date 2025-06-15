@@ -42,7 +42,7 @@
 
         & h2 {
             padding: 0 20px 0 35px;
-            border: 1px solid rgba(200, 50, 50, 0.3);
+            border: 1px solid var(--accent-color2);
             border-radius: 5px;
 
             font-size: 40px;
