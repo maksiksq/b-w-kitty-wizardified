@@ -8,6 +8,9 @@
 		isDarkColor = $bindable(false),
 		settings = $bindable(undefined)
 	} = $props();
+
+	let tempOverlay: boolean = $state(false);
+	$effect((): any => settings.overlay = tempOverlay.toString());
 </script>
 
 <div class="settings-wrap">
@@ -16,7 +19,7 @@
 			<Colorpick {defaultColors} {value} bind:isDarkColor />
 		{/each}
 		<div class="tint-bloc settings-bloc">
-			<input name="tint" type="checkbox" bind:checked={settings.overlay} />
+			<input name="tint" type="checkbox" bind:checked={tempOverlay} />
 			<label for="tint">Image tint</label>
 		</div>
 		<div class="welcome-bloc settings-bloc">

@@ -36,23 +36,25 @@
 	//
 
 	type TSettings = {
+		[key: string]: string
+
 		welcome: string;
-		overlay: boolean;
+		overlay: string;
 	}
 
 	let defaultSettings: TSettings = $state({
 		'welcome': 'a deep bottomless void (change me)',
-		'overlay': true
+		'overlay': 'true'
 	});
 
 	let settings: TSettings = $state({
 		'welcome': localStorage.getItem('s-welcome') || 'お帰りなさい',
-		'overlay': true
+		'overlay': localStorage.getItem('s-overlay') || 'true'
 	});
 
-	const onSettingsChange = (d: boolean, value: string): string => {
+	const onSettingsChange = (def: boolean, value: string): string => {
 		let r;
-		if (d) {
+		if (def) {
 			r = defaultSettings[value];
 		} else {
 			r = settings[value];
@@ -63,10 +65,19 @@
 
 	let welcome =
 		$derived(settings.welcome === ''
-				? onSettingsChange(true, 'welcome')
-				: onSettingsChange(false, 'welcome')
+			? onSettingsChange(true, 'welcome')
+			: onSettingsChange(false, 'welcome')
 		);
 
+	const parseBool = (str: string) => {
+		return (str === 'true');
+	};
+
+	let overlay =
+		$derived(parseBool(settings.overlay === ''
+			? onSettingsChange(true, 'overlay')
+			: onSettingsChange(false, 'overlay'))
+		);
 </script>
 
 <Lightbox {defaultColors} bind:showLightbox bind:settings />
@@ -74,7 +85,7 @@
 	<MainHeader {welcome} />
 	<div class="pic-wrap">
 		<Dockbar />
-		<div class="pic-cover {settings.overlay ? 'show-overlay' : ''}">
+		<div class="pic-cover {overlay ? 'show-overlay' : ''}">
 			<img src="/img/head-pic.png" alt="trippy cute cat" />
 		</div>
 	</div>
