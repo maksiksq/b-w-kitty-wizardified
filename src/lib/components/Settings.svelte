@@ -20,6 +20,21 @@
 		showEditor.val = !showEditor.val;
 		showLightbox.val = false;
 	}
+
+	let pic = $state(new Image());
+
+	const updatePic = (e: Event): void => {
+		const target = e.target as HTMLInputElement;
+		const file = target.files?.[0];
+		if (!file) return;
+
+		const reader = new FileReader();
+		reader.onload = () => {
+			pic.src = reader.result as string;
+			localStorage.setItem('i-pic-src', pic.src);
+		};
+		reader.readAsDataURL(file);
+	};
 </script>
 
 <div class="settings-wrap">
@@ -28,6 +43,14 @@
 			{#each Object.keys(defaultColors) as value}
 				<Colorpick {defaultColors} {value} bind:isDarkColor />
 			{/each}
+			<div class="pic-bloc settings-bloc">
+				<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
+				<label for="pic">Custom focal picture (1:1 ideally)</label>
+			</div>
+			<div class="bg-img-bloc settings-bloc">
+				<input name="bg-img" type="checkbox" bind:checked={tempOverlay} />
+				<label for="bg-img">Custom background image (16:19 ideally)</label>
+			</div>
 			<div class="tint-bloc settings-bloc">
 				<input name="tint" type="checkbox" bind:checked={tempOverlay} />
 				<label for="tint">Image tint</label>

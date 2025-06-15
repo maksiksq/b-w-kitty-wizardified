@@ -38,7 +38,6 @@ export const draggable = (node: HTMLElement, showEditor: boolean) => {
 	const disableDrag = () => {
 		node.style.userSelect = initialStyles.userSelect;
 		node.style.cursor = initialStyles.cursor;
-		node.style.transform = initialStyles.transform;
 
 		node.removeEventListener('mousedown', onMouseDown);
 		window.removeEventListener('mousemove', onMouseMove);

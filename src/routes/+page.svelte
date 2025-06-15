@@ -9,6 +9,7 @@
 
 	import { draggable } from '$lib/utils/actions.svelte';
 	import { showEditor } from '$lib/utils/shared.svelte';
+	import { picSrc } from '$lib/utils/shared.svelte';
 
 	// saving and updating css variables
 	type TColors = {
@@ -86,7 +87,7 @@
 
 	//
 
-	$inspect(showEditor.val);
+	picSrc.val = (localStorage.getItem('i-pic-src') || false) ? localStorage.getItem('i-pic-src') : "/img/head-pic.png";
 </script>
 
 <Lightbox {defaultColors} bind:isDarkColor bind:settings />
@@ -95,7 +96,7 @@
 	<div use:draggable={showEditor.val} class="pic-wrap">
 		<Dockbar {isDarkColor} />
 		<div class="pic-cover {overlay ? 'show-overlay' : ''}">
-			<img src="/img/head-pic.png" alt="trippy cute cat" />
+			<img src={picSrc.val} class="focal-pic" alt="trippy cute cat" />
 		</div>
 	</div>
 
