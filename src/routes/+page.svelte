@@ -1,4 +1,6 @@
 <script lang="ts">
+	export const ssr = false;
+
 	import Lightbox from '$lib/components/Lightbox.svelte';
 	import Dockbar from '$lib/components/Dockbar.svelte';
 	import { browser } from '$app/environment';
