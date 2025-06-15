@@ -1,8 +1,14 @@
 export const draggable = (node: HTMLElement, showEditor: boolean) => {
-	let moving = false;
+	let moving = $state(false);
 	let enabled = showEditor;
 
-	let pos = { x: node.offsetLeft, y: node.offsetTop };
+	let pos = $state({ x: node.offsetLeft, y: node.offsetTop });
+
+	const initialStyles = {
+		// position: node.style.position,
+		userSelect: node.style.userSelect,
+		cursor: node.style.cursor,
+	};
 
 	const onMouseDown = (): void => {
 		moving = true;
@@ -22,7 +28,7 @@ export const draggable = (node: HTMLElement, showEditor: boolean) => {
 	};
 
 	const enableDrag = () => {
-		node.style.position = 'absolute';
+		node.style.position = 'relative';
 		node.style.left = pos.x + 'px';
 		node.style.top = pos.y + 'px';
 		node.style.userSelect = 'none';
@@ -34,6 +40,10 @@ export const draggable = (node: HTMLElement, showEditor: boolean) => {
 	};
 
 	const disableDrag = () => {
+		// node.style.position = initialStyles.position;
+		node.style.userSelect = initialStyles.userSelect;
+		node.style.cursor = initialStyles.cursor;
+
 		node.removeEventListener('mousedown', onMouseDown);
 		window.removeEventListener('mousemove', onMouseMove);
 		window.removeEventListener('mouseup', onMouseUp);

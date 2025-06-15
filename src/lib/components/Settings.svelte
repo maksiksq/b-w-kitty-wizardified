@@ -17,7 +17,7 @@
 	$effect((): any => settings.overlay = tempOverlay.toString());
 
 	const switchToEditor = (): void => {
-		showEditor.val = true;
+		showEditor.val = !showEditor.val;
 		showLightbox.val = false;
 	}
 </script>
