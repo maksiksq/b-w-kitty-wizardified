@@ -2,13 +2,13 @@
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import Colorpick from '$lib/components/Colorpick.svelte';
 
-	const { defaultColors } = $props();
+	let { defaultColors, isDarkColor = $bindable(false) } = $props();
 </script>
 
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
 		{#each Object.keys(defaultColors) as value}
-			<Colorpick {defaultColors} {value} />
+			<Colorpick {defaultColors} {value} bind:isDarkColor />
 		{/each}
 	</div>
 </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ColorPicker from 'svelte-awesome-color-picker';
-	import { browser } from '$app/environment';
+
+	let { value, defaultColors, isDarkColor = $bindable() } = $props();
 
 	type Trgba = {
 		r: number,
@@ -29,9 +30,6 @@
 	};
 	const rgbaArrToRgbaString = ({ r, g, b, a }: Trgba) => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
 
-
-	let { value, defaultColors } = $props();
-
 	// the library only actually cares for the hsv value luckily for me
 
 	let hex = $state(
@@ -58,12 +56,19 @@
 		localStorage.setItem(key, color);
 	};
 
+	//
+
 	const label =
 		value === 'bg-color' ? 'Background color' :
-		value === 'text-color' ? 'Text color' :
-		value === 'accent-color' ?	'Main accent color' :
-		value === 'accent-color2' ?	'Secondary accent color' :
-	'why';
+			value === 'text-color' ? 'Text color' :
+				value === 'accent-color' ? 'Main accent color' :
+					value === 'accent-color2' ? 'Secondary accent color' :
+						'why';
+
+	//
+
+	let isDark = $state();
+
 </script>
 
 <ColorPicker
@@ -71,6 +76,10 @@
 	bind:hsv
 	bind:hex
 	bind:color
+	bind:isDark={
+	() => isDarkColor,
+	(d) => isDarkColor = value==='accent-color' ? d : isDarkColor
+	}
 	label={label}
 	sliderDirection="horizontal"
 	position="responsive"

@@ -5,6 +5,10 @@
 	import Settings from '$lib/components/Settings.svelte';
 
 	let { showLightbox, defaultColors } = $props();
+
+	let isDarkColor = $state(false);
+
+	$inspect(isDarkColor);
 </script>
 
 {#if showLightbox}
@@ -13,13 +17,12 @@
 	<button class="cross-wrap" onclick={() => {showLightbox=false}}>
 		<Fa icon={faTimes} class="cross"></Fa>
 	</button>
-	<Settings {defaultColors} />
-
+	<Settings {defaultColors} bind:isDarkColor />
 
 {/if}
 <!-- -->
 <button type="button" class="settings-button" onclick={() => {showLightbox = true}}>
-	<Fa icon={faPaintRoller} color="#2e2e2e"></Fa>
+	<Fa icon={faPaintRoller} color={isDarkColor ? 'white' : '2e2e2e'}></Fa>
 </button>
 
 <style>
@@ -57,9 +60,6 @@
             transition: opacity 0.3s;
             width: 2vw;
             height: 2vw;
-
-						color: white;
-
 
             &:hover {
                 opacity: 1;
