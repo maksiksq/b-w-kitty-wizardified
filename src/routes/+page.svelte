@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Lightbox from '$lib/components/Lightbox.svelte';
 	import Dockbar from '$lib/components/Dockbar.svelte';
-	import { browser } from '$app/environment';
 
 	import '../global.css';
 	import Clock from '$lib/components/Clock.svelte';
@@ -93,7 +92,6 @@
 			<img src="/img/head-pic.png" alt="trippy cute cat" />
 		</div>
 	</div>
-
 
 	<Clock />
 	<!--    <Searchbar/>-->

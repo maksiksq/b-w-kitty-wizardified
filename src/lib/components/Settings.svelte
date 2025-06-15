@@ -4,6 +4,8 @@
 	import Fa from 'svelte-fa';
 	import { fas } from '@fortawesome/free-solid-svg-icons';
 
+	import { showEditor } from '$lib/components/shared.svelte';
+
 	let {
 		defaultColors,
 		showLightbox = $bindable(false),
@@ -32,7 +34,7 @@
 			</div>
 		</section>
 		<section class="editor-bloc-cont">
-			<button class="editor-button">
+			<button class="editor-button" onclick={() => {showEditor.val = !showEditor.val}}>
 				<Fa icon={fas['faPenToSquare']}></Fa>
 			</button>
 		</section>
@@ -103,8 +105,8 @@
 
 										cursor: pointer;
 
-										width: 3vw;
-										height: 3vw;
+										width: 2.5vw;
+										height: 2.5vw;
 
 										:global {
                         svg {
@@ -114,8 +116,6 @@
                     }
                 }
 						}
-
-
         }
     }
 
