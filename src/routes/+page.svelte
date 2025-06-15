@@ -40,15 +40,33 @@
 		overlay: boolean;
 	}
 
-	let settings: TSettings = $state({
-		'welcome': 'お帰りなさい',
+	let defaultSettings: TSettings = $state({
+		'welcome': 'a deep bottomless void (change me)',
 		'overlay': true
-
 	});
 
-	let welcome = $derived(settings.welcome==='' ? 'a bottomless void of sorrow (change me pls)' : settings.welcome);
+	let settings: TSettings = $state({
+		'welcome': localStorage.getItem('s-welcome') || 'お帰りなさい',
+		'overlay': true
+	});
 
-	$inspect('hai', settings.overlay);
+	const onSettingsChange = (d: boolean, value: string): string => {
+		let r;
+		if (d) {
+			r = defaultSettings[value];
+		} else {
+			r = settings[value];
+		}
+		localStorage.setItem(`s-${value}`, r);
+		return r;
+	};
+
+	let welcome =
+		$derived(settings.welcome === ''
+				? onSettingsChange(true, 'welcome')
+				: onSettingsChange(false, 'welcome')
+		);
+
 </script>
 
 <Lightbox {defaultColors} bind:showLightbox bind:settings />
