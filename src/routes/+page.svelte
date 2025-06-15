@@ -7,7 +7,7 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	let time: Date = new Date();
-	let timeDisplay: string = "no";
+	let timeDisplay: string = $state("no");
 
 	if (!browser) {
 		timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5);
