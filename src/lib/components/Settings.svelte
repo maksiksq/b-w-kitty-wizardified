@@ -2,7 +2,12 @@
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import Colorpick from '$lib/components/Colorpick.svelte';
 
-	let { defaultColors, isDarkColor = $bindable(false), settings=$bindable(undefined) } = $props();
+	let {
+		defaultColors,
+		showLightbox = $bindable(false),
+		isDarkColor = $bindable(false),
+		settings = $bindable(undefined)
+	} = $props();
 </script>
 
 <div class="settings-wrap">
@@ -10,7 +15,16 @@
 		{#each Object.keys(defaultColors) as value}
 			<Colorpick {defaultColors} {value} bind:isDarkColor />
 		{/each}
-		<input type="checkbox" bind:checked={settings.overlay} />
+		<div class="tint-bloc settings-bloc">
+			<input name="tint" type="checkbox" bind:checked={settings.overlay} />
+			<label for="tint">Image tint</label>
+		</div>
+		<div class="welcome-bloc settings-bloc">
+			<input name="welcome" type="text" bind:value={settings.welcome}
+						 onkeydown={(e) => {e.key === 'Enter' ? showLightbox=false : ''}} />
+			<label for="welcome">Upper text</label>
+		</div>
+
 	</div>
 </div>
 
@@ -42,11 +56,15 @@
             pointer-events: auto;
 
             /* inner color picker bits */
-            --cp-bg-color: rgba(46,46,46,1);
+            --cp-bg-color: rgba(46, 46, 46, 1);
             --cp-border-color: var(--accent-color2);
             --cp-text-color: white;
-            --cp-input-color: rgba(50,200,150,0.3);
-            --cp-button-hover-color: rgba(50,200,150,0.3);
+            --cp-input-color: rgba(50, 200, 150, 0.3);
+            --cp-button-hover-color: rgba(50, 200, 150, 0.3);
+
+            .settings-bloc {
+                color: white;
+            }
         }
     }
 

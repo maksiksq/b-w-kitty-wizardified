@@ -7,9 +7,7 @@
 	import Clock from '$lib/components/Clock.svelte';
 	import MainHeader from '$lib/components/MainHeader.svelte';
 
-	const showLightbox: boolean = false;
-
-	let welcome = $state('お帰りなさい');
+	let showLightbox: boolean = $state(false);
 
 	// saving and updating css variables
 	type TColors = {
@@ -38,10 +36,12 @@
 	//
 
 	type TSettings = {
+		welcome: string;
 		overlay: boolean;
 	}
 
 	let settings: TSettings = $state({
+		'welcome': 'お帰りなさい',
 		'overlay': true,
 
 	});
@@ -49,9 +49,9 @@
 	$inspect('hai', settings.overlay);
 </script>
 
-<Lightbox {showLightbox} {defaultColors} bind:settings />
+<Lightbox {defaultColors} bind:showLightbox bind:settings />
 <main class="main-wrapper">
-	<MainHeader {welcome} />
+	<MainHeader welcome={settings.welcome} />
 	<div class="pic-wrap">
 		<Dockbar />
 		<div class="pic-cover {settings.overlay ? 'show-overlay' : ''}">
