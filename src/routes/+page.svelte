@@ -42,16 +42,18 @@
 
 	let settings: TSettings = $state({
 		'welcome': 'お帰りなさい',
-		'overlay': true,
+		'overlay': true
 
 	});
+
+	let welcome = $derived(settings.welcome==='' ? 'a bottomless void of sorrow (change me pls)' : settings.welcome);
 
 	$inspect('hai', settings.overlay);
 </script>
 
 <Lightbox {defaultColors} bind:showLightbox bind:settings />
 <main class="main-wrapper">
-	<MainHeader welcome={settings.welcome} />
+	<MainHeader {welcome} />
 	<div class="pic-wrap">
 		<Dockbar />
 		<div class="pic-cover {settings.overlay ? 'show-overlay' : ''}">
@@ -75,7 +77,6 @@
         width: 100%;
         z-index: -1;
     }
-
 
 
     .pic-wrap {
