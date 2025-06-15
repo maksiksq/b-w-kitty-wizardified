@@ -7,8 +7,10 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	let time: Date = new Date();
-	let timeDisplay: string = $state("00:00");
-	timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)
+	let timeDisplay: string = $state('');
+	if (browser) {
+		timeDisplay = time.toLocaleTimeString('de-De').slice(0, 5);
+	}
 
 	const showLightbox: boolean = false;
 
@@ -17,17 +19,17 @@
 	onMount(() => {
 		// live-ish timer update
 		const interval = setInterval(() => {
-			time = new Date();
-			timeDisplay = time.toLocaleTimeString("de-De").slice(0, 5)},
+				time = new Date();
+				timeDisplay = time.toLocaleTimeString('de-De').slice(0, 5);
+			},
 			1000);
 
 		// void
 		onDestroy(() => {
 			clearInterval(interval);
-		})
+		});
 
-	})
-
+	});
 
 
 </script>
@@ -46,7 +48,10 @@
 
 
 	<div class="time">
-		<h2>{ timeDisplay }</h2>
+		{#if timeDisplay}
+			<h2>{ timeDisplay }</h2>
+		{/if}
+
 	</div>
 	<!--    <Searchbar/>-->
 </main>
@@ -106,6 +111,7 @@
             z-index: 101;
         }
     }
+
     .time {
         display: flex;
         flex-direction: row;
