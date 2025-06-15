@@ -87,7 +87,7 @@
             height: 29.4vw;
             width: 29.4vw;
 
-            background-color: #2e2e2e;
+            background-color: var(--bg-color);
             opacity: 0.3;
             z-index: 101;
         }
