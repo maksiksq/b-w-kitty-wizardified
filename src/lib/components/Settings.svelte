@@ -4,7 +4,7 @@
 	import Fa from 'svelte-fa';
 	import { fas } from '@fortawesome/free-solid-svg-icons';
 
-	import { showEditor } from '$lib/utils/shared.svelte.js';
+	import { picSrc, showEditor } from '$lib/utils/shared.svelte.js';
 	import { showLightbox } from '$lib/utils/shared.svelte';
 
 	let {
@@ -31,6 +31,7 @@
 		const reader = new FileReader();
 		reader.onload = () => {
 			pic.src = reader.result as string;
+			picSrc.val = pic.src;
 			localStorage.setItem('i-pic-src', pic.src);
 		};
 		reader.readAsDataURL(file);

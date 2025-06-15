@@ -87,7 +87,7 @@
 
 	//
 
-	picSrc.val = (localStorage.getItem('i-pic-src') || false) ? localStorage.getItem('i-pic-src') : "/img/head-pic.png";
+	picSrc.val = localStorage.getItem('i-pic-src') ?? "/img/head-pic.png"
 </script>
 
 <Lightbox {defaultColors} bind:isDarkColor bind:settings />
