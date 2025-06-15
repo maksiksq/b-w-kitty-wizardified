@@ -101,7 +101,7 @@
 					<label for="tint">Image tint</label>
 				</div>
 				<div class="bloc-seg-r">
-					<button>Default</button>
+					<button onclick={() => {tempOverlay = true}}>Default</button>
 				</div>
 			</div>
 			<div class="welcome-bloc settings-bloc">
@@ -111,7 +111,7 @@
 								 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
 				</div>
 				<div class="bloc-seg-r">
-					<button>Default</button>
+					<button onclick={() => {settings.welcome = "お帰りなさい"}}>Default</button>
 				</div>
 			</div>
 		</section>
