@@ -41,11 +41,11 @@
             pointer-events: auto;
 
             /* inner color picker bits */
-            --cp-bg-color: var(--bg-color);
+            --cp-bg-color: rgba(46,46,46,1);
             --cp-border-color: var(--accent-color2);
             --cp-text-color: white;
-            --cp-input-color: var(--accent-color);
-            --cp-button-hover-color: var(--accent-color);
+            --cp-input-color: rgba(50,200,150,0.3);
+            --cp-button-hover-color: rgba(50,200,150,0.3);
         }
     }
 

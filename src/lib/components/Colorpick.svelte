@@ -57,6 +57,13 @@
 		root.style.setProperty('--' + key, color);
 		localStorage.setItem(key, color);
 	};
+
+	const label =
+		value === 'bg-color' ? 'Background color' :
+		value === 'text-color' ? 'Text color' :
+		value === 'accent-color' ?	'Main accent color' :
+		value === 'accent-color2' ?	'Secondary accent color' :
+	'why';
 </script>
 
 <ColorPicker
@@ -64,8 +71,8 @@
 	bind:hsv
 	bind:hex
 	bind:color
+	label={label}
 	sliderDirection="horizontal"
 	position="responsive"
-
 	onInput={changeColor(value, rgbaArrToRgbaString(rgb))}
 />

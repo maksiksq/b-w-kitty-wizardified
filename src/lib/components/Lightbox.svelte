@@ -33,7 +33,7 @@
         width: 100vw;
         height: 100vh;
 
-        background-color: var(--bg-color);
+        background-color: rgba(46, 46, 46, 1);
 
         transition: all 0.5s ease-in-out;
         border-radius: 0;
@@ -57,6 +57,8 @@
             transition: opacity 0.3s;
             width: 2vw;
             height: 2vw;
+
+						color: white;
 
 
             &:hover {
