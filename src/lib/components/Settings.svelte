@@ -42,7 +42,7 @@ const { defaultColors } = $props();
             pointer-events: auto;
 
 						/* inner color picker bits */
-            --cp-bg-color: rgba(46,46,46,0.3);
+            --cp-bg-color: var(--bg-color);
             --cp-border-color: var(--accent-color2);
             --cp-text-color: white;
             --cp-input-color: var(--accent-color);

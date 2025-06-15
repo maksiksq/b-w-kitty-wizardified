@@ -92,7 +92,7 @@
                 font-size: 40px;
                 padding: 5px 10px 5px 10px;
                 border-radius: 5px 0 0 5px;
-                background-color: rgba(50, 200, 150, 0.3);
+                background-color: var(--accent-color);
                 transition: .5s;
                 opacity: 0.5;
                 left: -20px;

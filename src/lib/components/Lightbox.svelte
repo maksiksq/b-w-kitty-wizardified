@@ -33,7 +33,7 @@
         width: 100vw;
         height: 100vh;
 
-        background-color: rgba(46, 46, 46, 1);
+        background-color: var(--bg-color);
 
         transition: all 0.5s ease-in-out;
         border-radius: 0;
@@ -75,7 +75,7 @@
 
         padding: 10px 15px 6px 30px;
 
-        background-color: rgba(50, 200, 150, 0.3);
+        background-color: var(--accent-color);
 
         transition: all 0.3s;
         border-radius: 5px;
