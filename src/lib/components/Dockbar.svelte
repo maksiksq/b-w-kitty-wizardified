@@ -62,7 +62,7 @@
                     ? fas[bookmark.icon]
                     : fab[bookmark.icon]
                 }
-					color={isDarkColor ? 'white' : '#2e2e2e'}
+					color={isDarkColor ? '#dfdfdf' : '#2e2e2e'}
 			/>
 		</a>
 	{/each}

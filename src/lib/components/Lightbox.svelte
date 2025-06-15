@@ -19,7 +19,7 @@
 {/if}
 <!-- -->
 <button type="button" class="settings-button" onclick={() => {showLightbox = true}}>
-	<Fa icon={faPaintRoller} color={isDarkColor ? 'white' : '2e2e2e'}></Fa>
+	<Fa icon={faPaintRoller} color={isDarkColor ? '#dfdfdf' : '#2e2e2e'}></Fa>
 </button>
 
 <style>

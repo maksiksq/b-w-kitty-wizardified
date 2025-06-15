@@ -28,7 +28,7 @@
 			a: a
 		};
 	};
-	const rgbaArrToRgbaString = ({ r, g, b, a }: Trgba) => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
+	const rgbaArrToRgbaString = ({ r, g, b, a }: Trgba): string => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
 
 	// the library only actually cares for the hsv value luckily for me
 
@@ -82,5 +82,5 @@
 	label={label}
 	sliderDirection="horizontal"
 	position="responsive"
-	onInput={changeColor(value, rgbaArrToRgbaString(rgb))}
+	onInput={() => { changeColor(value, rgbaArrToRgbaString(rgb)); }}
 />
