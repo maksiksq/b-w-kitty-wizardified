@@ -83,7 +83,7 @@
 					<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
 				</div>
 				<div class="bloc-seg-r">
-					<button onclick={resetPic}>Reset</button>
+					<button onclick={resetPic}>Default</button>
 				</div>
 			</div>
 			<div class="bg-img-bloc settings-bloc">
@@ -92,7 +92,7 @@
 					<input name="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
 				</div>
 				<div class="bloc-seg-r">
-					<button onclick={resetBgImg}>Reset</button>
+					<button onclick={resetBgImg}>Default</button>
 				</div>
 			</div>
 			<div class="tint-bloc settings-bloc">
@@ -145,10 +145,16 @@
 
         & .settings-wrap-inner {
             width: 50vw;
-            height: 50vh;
+            height: 60vh;
 
             user-select: none;
             pointer-events: auto;
+
+						background-color: rgba(0, 0, 0, 0.25);
+
+						padding: 1.25vw;
+						border-radius: 5px;
+            border: var(--accent-color2) solid 1px;
 
             display: flex;
             flex-direction: row;
