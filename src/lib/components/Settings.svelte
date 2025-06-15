@@ -11,7 +11,7 @@
 		settings = $bindable(undefined)
 	} = $props();
 
-	let tempOverlay: boolean = $state(false);
+	let tempOverlay: boolean = $state(settings.overlay === 'true');
 	$effect((): any => settings.overlay = tempOverlay.toString());
 </script>
 
