@@ -28,7 +28,10 @@
 			a: a
 		};
 	};
-	const rgbaArrToCssRgbaString = ({ r, g, b, a }: Trgba): string => `rgba(${r}, ${g}, ${b}, ${Math.round(a * 255)})`;
+
+	const rgbaArrToCssRgbaString = ({ r, g, b, a }: Trgba): string => `rgba(${r}, ${g}, ${b}, ${a})`;
+
+	// const cssRgbaToRgbaToObj = (str: string) => ({r, g, b, a} = str.match(/\d+(\.\d+)?/g).reduce((o, v, i) => (['r','g','b','a'].forEach((k,j)=>i==j&&(o[k]=+v)), o), {}));
 
 	// the library only actually cares for the hsv value luckily for me
 
@@ -52,6 +55,7 @@
 	let root = document.documentElement;
 
 	let changeColor = (key: string, color: string) => {
+		$inspect(color)
 		root.style.setProperty('--' + key, color);
 		localStorage.setItem(key, color);
 	};
@@ -75,8 +79,8 @@
 <div class="bloc-seg-l">
 	<ColorPicker
 		bind:rgb
-		bind:hsv
 		bind:hex
+		bind:hsv
 		bind:color
 		bind:isDark={
 	() => isDarkColor,
