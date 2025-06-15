@@ -4,11 +4,10 @@
 	import { faPaintRoller, faTimes } from '@fortawesome/free-solid-svg-icons';
 	import Settings from '$lib/components/Settings.svelte';
 
-	let { showLightbox, defaultColors } = $props();
+	let { showLightbox, defaultColors, settings=$bindable(undefined) } = $props();
 
 	let isDarkColor = $state(false);
 
-	$inspect(isDarkColor);
 </script>
 
 {#if showLightbox}
@@ -17,7 +16,7 @@
 	<button class="cross-wrap" onclick={() => {showLightbox=false}}>
 		<Fa icon={faTimes} class="cross"></Fa>
 	</button>
-	<Settings {defaultColors} bind:isDarkColor />
+	<Settings {defaultColors} bind:isDarkColor bind:settings />
 
 {/if}
 <!-- -->

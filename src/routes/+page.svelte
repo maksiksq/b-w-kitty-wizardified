@@ -35,14 +35,26 @@
 		}
 	});
 
+	//
+
+	type TSettings = {
+		overlay: boolean;
+	}
+
+	let settings: TSettings = $state({
+		'overlay': true,
+
+	});
+
+	$inspect('hai', settings.overlay);
 </script>
 
-<Lightbox {showLightbox} {defaultColors} />
+<Lightbox {showLightbox} {defaultColors} bind:settings />
 <main class="main-wrapper">
 	<MainHeader {welcome} />
 	<div class="pic-wrap">
 		<Dockbar />
-		<div class="pic-cover">
+		<div class="pic-cover {settings.overlay ? 'show-overlay' : ''}">
 			<img src="/img/head-pic.png" alt="trippy cute cat" />
 		</div>
 	</div>
@@ -79,7 +91,7 @@
             }
         }
 
-        & .pic-cover::after {
+        & .pic-cover.show-overlay::after {
             content: " ";
             position: absolute;
             top: 0;

@@ -2,7 +2,7 @@
 	import ColorPicker from 'svelte-awesome-color-picker';
 	import Colorpick from '$lib/components/Colorpick.svelte';
 
-	let { defaultColors, isDarkColor = $bindable(false) } = $props();
+	let { defaultColors, isDarkColor = $bindable(false), settings=$bindable(undefined) } = $props();
 </script>
 
 <div class="settings-wrap">
@@ -10,6 +10,7 @@
 		{#each Object.keys(defaultColors) as value}
 			<Colorpick {defaultColors} {value} bind:isDarkColor />
 		{/each}
+		<input type="checkbox" bind:checked={settings.overlay} />
 	</div>
 </div>
 
