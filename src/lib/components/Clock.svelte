@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { onDestroy, onMount } from 'svelte';
+	import { showEditor } from '$lib/utils/shared.svelte';
+	import { draggable } from '$lib/utils/actions.svelte';
 
 	let time: Date = new Date();
 	let timeDisplay: string = $state('');
@@ -20,11 +22,10 @@
 		onDestroy(() => {
 			clearInterval(interval);
 		});
-
 	});
 </script>
 
-<div class="time">
+<div use:draggable={showEditor.val} class="time">
 	{#if timeDisplay}
 		<h2>{ timeDisplay }</h2>
 	{/if}

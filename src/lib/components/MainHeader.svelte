@@ -1,9 +1,11 @@
 <script>
+	import { showEditor } from '$lib/utils/shared.svelte.js';
+	import { draggable } from '$lib/utils/actions.svelte';
 
 	let { welcome } = $props();
 </script>
 
-<div class="h-text">
+<div use:draggable={showEditor.val} class="h-text">
 	<h1>{welcome}</h1>
 </div>
 

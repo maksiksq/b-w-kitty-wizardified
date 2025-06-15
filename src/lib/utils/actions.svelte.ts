@@ -2,7 +2,13 @@ export const draggable = (node: HTMLElement, showEditor: boolean) => {
 	let moving = $state(false);
 	let enabled = showEditor;
 
-	let pos = $state({ x: node.offsetLeft, y: node.offsetTop });
+	const rect = node.getBoundingClientRect();
+	const parentRect = node.offsetParent?.getBoundingClientRect() ?? { left: 0, top: 0 };
+
+	let pos = $state({
+		x: rect.left - parentRect.left,
+		y: rect.top - parentRect.top
+	});
 
 	const initialStyles = {
 		// position: node.style.position,
@@ -28,7 +34,7 @@ export const draggable = (node: HTMLElement, showEditor: boolean) => {
 	};
 
 	const enableDrag = () => {
-		node.style.position = 'relative';
+		node.style.position = 'absolute';
 		node.style.left = pos.x + 'px';
 		node.style.top = pos.y + 'px';
 		node.style.userSelect = 'none';

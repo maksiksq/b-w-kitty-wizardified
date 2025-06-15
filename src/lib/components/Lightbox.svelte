@@ -15,7 +15,7 @@
 	<div class="lightbox" role="presentation" onclick={() => {showLightbox.val = false}}></div>
 	<button class="cross-wrap" onclick={() => {showLightbox.val=false}}>
 		<Fa icon={faTimes} class="cross"></Fa>
-	</button>b
+	</button>
 	<Settings {defaultColors} bind:isDarkColor bind:settings />
 
 {/if}
