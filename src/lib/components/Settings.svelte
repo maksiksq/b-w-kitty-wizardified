@@ -4,17 +4,22 @@
 	import Fa from 'svelte-fa';
 	import { fas } from '@fortawesome/free-solid-svg-icons';
 
-	import { showEditor } from '$lib/components/shared.svelte';
+	import { showEditor } from '$lib/utils/shared.svelte.js';
+	import { showLightbox } from '$lib/utils/shared.svelte';
 
 	let {
 		defaultColors,
-		showLightbox = $bindable(false),
 		isDarkColor = $bindable(false),
 		settings = $bindable(undefined)
 	} = $props();
 
 	let tempOverlay: boolean = $state(settings.overlay === 'true');
 	$effect((): any => settings.overlay = tempOverlay.toString());
+
+	const switchToEditor = (): void => {
+		showEditor.val = true;
+		showLightbox.val = false;
+	}
 </script>
 
 <div class="settings-wrap">
@@ -30,11 +35,11 @@
 			<div class="welcome-bloc settings-bloc">
 				<label for="welcome">Upper text: &nbsp</label>
 				<input name="welcome" type="text" bind:value={settings.welcome}
-							 onkeydown={(e) => {e.key === 'Enter' ? showLightbox=false : ''}} />
+							 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
 			</div>
 		</section>
 		<section class="editor-bloc-cont">
-			<button class="editor-button" onclick={() => {showEditor.val = !showEditor.val}}>
+			<button class="editor-button" onclick={() => {switchToEditor()}}>
 				<Fa icon={fas['faPenToSquare']}></Fa>
 			</button>
 		</section>

@@ -5,8 +5,7 @@
 	import '../global.css';
 	import Clock from '$lib/components/Clock.svelte';
 	import MainHeader from '$lib/components/MainHeader.svelte';
-
-	let showLightbox: boolean = $state(false);
+	import { onMount } from 'svelte';
 
 	// saving and updating css variables
 	type TColors = {
@@ -81,12 +80,34 @@
 	//
 
 	let isDarkColor = $state((localStorage.getItem('is-dark-color') === 'true') || false);
+
+	//
+
+	let x = $state(0);
+	let y = $state(0);
+
+	let moving = $state(false);
+
+	const onMouseDown = (): void => {
+		moving = true;
+	}
+
+	const onMouseMove = (e: MouseEvent): void => {
+		if (moving) {
+			x += e.movementX;
+			y += e.movementY;
+		}
+	}
+
+	function onMouseUp() {
+		moving = false;
+	}
 </script>
 
-<Lightbox {defaultColors} bind:showLightbox bind:isDarkColor bind:settings />
+<Lightbox {defaultColors} bind:isDarkColor bind:settings />
 <main class="main-wrapper">
 	<MainHeader {welcome} />
-	<div class="pic-wrap">
+	<div onmousedown={onMouseDown} role="presentation" style="left: {x}px; top: {y}px;" class="pic-wrap draggable">
 		<Dockbar {isDarkColor} />
 		<div class="pic-cover {overlay ? 'show-overlay' : ''}">
 			<img src="/img/head-pic.png" alt="trippy cute cat" />
@@ -97,6 +118,7 @@
 	<!--    <Searchbar/>-->
 </main>
 
+<svelte:window onmouseup={onMouseUp} onmousemove={onMouseMove} />
 
 <style>
     .main-wrapper {
