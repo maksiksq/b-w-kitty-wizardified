@@ -234,7 +234,9 @@
 				{/each}
 
 			</div>
-			<ul class="settings-bloc-cont settings-bloc-cont-r"></ul>
+			<ul class="settings-bloc-cont settings-bloc-cont-r">
+				<li></li>
+			</ul>
 		</section>
 		<section class="editor-seg">
 			<div class="editor-bloc-cont">
