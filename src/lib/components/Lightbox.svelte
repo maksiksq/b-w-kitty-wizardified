@@ -54,6 +54,7 @@
         cursor: pointer;
 
         :global(.cross) {
+						color: white;
             opacity: 0.3;
             transition: opacity 0.3s;
             width: 2vw;
