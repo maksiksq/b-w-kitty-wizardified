@@ -55,7 +55,6 @@
 	let root = document.documentElement;
 
 	let changeColor = (key: string, color: string) => {
-		$inspect(color)
 		root.style.setProperty('--' + key, color);
 		localStorage.setItem(key, color);
 	};

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import ColorPicker from 'svelte-awesome-color-picker';
-	import Colorpick from '$lib/components/Colorpick.svelte';
+	import Colorpick from '$lib/components/Settings/ColorpickSetting.svelte';
 	import Fa from 'svelte-fa';
 	import { fas } from '@fortawesome/free-solid-svg-icons';
 
 	import { picSrc, showEditor } from '$lib/utils/shared.svelte.js';
 	import { showLightbox } from '$lib/utils/shared.svelte';
+	import Setting from '$lib/components/Settings/Setting.svelte';
 
 	let {
 		defaultColors,
@@ -40,7 +41,7 @@
 	const resetPic = (e: Event): void => {
 		picSrc.val = '/img/head-pic.png';
 		localStorage.setItem('i-pic-src', '/img/head-pic.png');
-	}
+	};
 
 	//
 
@@ -65,61 +66,75 @@
 	const resetBgImg = (e: Event): void => {
 		root.style.setProperty('--bg-img', '');
 		localStorage.setItem('bg-img', '');
-	}
+	};
 
+	let sData = $state({
+		pictures: [
+			{
+				name: 'pic',
+				label: 'Custom focal picture (1:1 ideally)',
+				alt: 'kitty image',
+				handler: updatePic,
+				reset: resetPic
+			},
+			{
+				name: 'bg-img',
+				label: 'Custom background image (16:19 ideally)',
+				alt: 'bg image',
+				handler: changeBgImg,
+				reset: resetBgImg
+			}
+		]
+	});
 </script>
 
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
-		<section class="settings-bloc-cont">
-			{#each Object.keys(defaultColors) as value}
-				<div class="colorpick-bloc settings-bloc">
-					<Colorpick {defaultColors} {value} bind:isDarkColor />
-				</div>
-			{/each}
-			<div class="pic-bloc settings-bloc">
-				<div class="bloc-seg-l">
-					<label for="pic" class="img-label">Custom focal picture (1:1 ideally)
-						<input class="img-input pointer" name="pic" id="pic" type="file" alt="kitty image" oninput={updatePic} />
-					</label>
-				</div>
-				<div class="bloc-seg-r">
-					<button onclick={resetPic} class="default-button">Default</button>
-				</div>
-			</div>
-			<div class="bg-img-bloc settings-bloc">
-				<div class="bloc-seg-l">
-					<label for="bg-img" class="img-label">Custom background image (16:19 ideally)</label>
-					<input class="img-input pointer" name="bg-img" id="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
-				</div>
-				<div class="bloc-seg-r">
-					<button onclick={resetBgImg} class="default-button">Default</button>
-				</div>
-			</div>
-			<div class="tint-bloc settings-bloc">
-				<div class="bloc-seg-l">
-					<input class="pointer" name="tint" id="tint" type="checkbox" bind:checked={tempOverlay} />
-					<label class="check-label" for="tint">Image tint</label>
-				</div>
-				<div class="bloc-seg-r">
-					<button onclick={() => {tempOverlay = true}} class="default-button">Default</button>
-				</div>
-			</div>
-			<div class="welcome-bloc settings-bloc">
-				<div class="bloc-seg-l">
-					<label for="welcome">Upper text: &nbsp</label>
-					<input name="welcome" id="welcome" type="text" bind:value={settings.welcome}
-								 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
-				</div>
-				<div class="bloc-seg-r">
-					<button onclick={() => {settings.welcome = "お帰りなさい"}} class="default-button">Default</button>
-				</div>
-			</div>
+		<section>
+			<ul class="settings-bloc-cont">
+				<!-- colors-->
+				{#each Object.keys(defaultColors) as value}
+					<li class="colorpick-bloc settings-bloc">
+						<Colorpick {defaultColors} {value} bind:isDarkColor />
+					</li>
+				{/each}
+				<!-- images-->
+				{#each sData.pictures as values}
+					<li class="img-bloc settings-bloc">
+						<Setting values={values} />
+					</li>
+				{/each}
+				<!-- checks-->
+				<li class="tint-bloc settings-bloc">
+					<div class="bloc-seg-l">
+						<input class="pointer" name="tint" id="tint" type="checkbox" bind:checked={tempOverlay} />
+						<label class="check-label" for="tint">Image tint</label>
+					</div>
+					<div class="bloc-seg-r">
+						<button onclick={() => {tempOverlay = true}} class="default-button">Default</button>
+					</div>
+				</li>
+				<!-- texts-->
+				<li class="welcome-bloc settings-bloc">
+					<div class="bloc-seg-l">
+						<label for="welcome">Upper text: &nbsp</label>
+						<input name="welcome" id="welcome" type="text" bind:value={settings.welcome}
+									 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
+					</div>
+					<div class="bloc-seg-r">
+						<button onclick={() => {settings.welcome = "お帰りなさい"}} class="default-button">Default</button>
+					</div>
+				</li>
+			</ul>
 		</section>
-		<section class="editor-bloc-cont">
-			<button class="editor-button" onclick={() => {switchToEditor()}}>
-				<Fa icon={fas['faPenToSquare']}></Fa>
-			</button>
+		<section>
+			<ul class="editor-bloc-cont">
+				<li>
+					<button class="editor-button" onclick={() => {switchToEditor()}}>
+						<Fa icon={fas['faPenToSquare']}></Fa>
+					</button>
+				</li>
+			</ul>
 		</section>
 
 	</div>
@@ -151,10 +166,10 @@
             user-select: none;
             pointer-events: auto;
 
-						background-color: rgba(0, 0, 0, 0.25);
+            background-color: rgba(0, 0, 0, 0.25);
 
-						padding: 1.25vw;
-						border-radius: 5px;
+            padding: 1.25vw;
+            border-radius: 5px;
             border: var(--accent-color2) solid 1px;
 
             display: flex;
@@ -169,78 +184,102 @@
 
             & section {
                 width: 50%;
-            }
-
-            & .settings-bloc-cont {
-                display: flex;
-                flex-direction: column;
-                gap: 1vw;
-
-                padding-right: 1vw;
-
-                border-right: var(--accent-color2) solid 1px;
-
-                & .settings-bloc {
-                    color: white;
-
-                    display: flex;
-                    flex-direction: row;
-
-										:global {
-												.bloc-seg-l {
-														& .check-label {
-															cursor: pointer;
-														}
-                            & .img-label {
-                                cursor: pointer;
-                            }
-														& .img-input {
-																margin-top: 15px;
-														}
-														& .img-input::-webkit-file-upload-button {
-                                display: none;
-                            }
-                            & .img-input::file-selector-button {
-                                display: none;
-                            }
-												}
-                        .bloc-seg-r {
-                            margin-left: auto;
-
-														& .default-button {
-																border-radius: 1px;
-																padding: 3px;
-																background-color: white;
-																cursor: pointer;
-														}
-                        }
-										}
-                }
-            }
-
-            & .editor-bloc-cont {
-                padding-left: 1%;
 
                 display: flex;
+                flex-direction: row;
                 align-items: center;
                 justify-content: center;
 
-                & .editor-button {
+                & ul {
                     all: unset;
 
-                    cursor: pointer;
+                    li {
+                        all: unset;
+                    }
+                }
 
-                    width: 2.5vw;
-                    height: 2.5vw;
+                & .settings-bloc-cont {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1vw;
 
-                    :global {
-                        svg {
-                            width: 100%;
-                            height: 100%;
+                    padding-right: 1vw;
+
+                    border-right: var(--accent-color2) solid 1px;
+
+                    & .settings-bloc {
+                        color: white;
+
+                        display: flex;
+                        flex-direction: row;
+
+                        :global {
+                            .bloc-seg-l {
+                                & .check-label {
+                                    cursor: pointer;
+                                }
+
+                                & .img-label {
+                                    cursor: pointer;
+                                }
+
+                                & .img-input {
+                                    margin-top: 15px;
+                                }
+
+                                & .img-input::-webkit-file-upload-button {
+                                    display: none;
+                                }
+
+                                & .img-input::file-selector-button {
+                                    display: none;
+                                }
+                            }
+
+                            .bloc-seg-r {
+                                margin-left: auto;
+
+                                & .default-button {
+                                    border-radius: 1px;
+                                    padding: 3px;
+                                    background-color: white;
+                                    cursor: pointer;
+                                }
+                            }
                         }
                     }
                 }
+
+                & .editor-bloc-cont {
+                    padding-left: 1%;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    & li {
+                        & .editor-button {
+                            all: unset;
+
+                            cursor: pointer;
+
+                            width: 2.5vw;
+                            height: 2.5vw;
+
+                            :global {
+                                svg {
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
             }
+
+
         }
     }
 
