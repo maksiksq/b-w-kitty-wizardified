@@ -50,3 +50,7 @@ h1, h2, h3, p  {
     border: solid 1px gray;
     position: absolute;
 }
+
+.pointer {
+    cursor: pointer;
+}

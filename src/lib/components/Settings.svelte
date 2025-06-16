@@ -79,39 +79,40 @@
 			{/each}
 			<div class="pic-bloc settings-bloc">
 				<div class="bloc-seg-l">
-					<label for="pic">Custom focal picture (1:1 ideally)</label>
-					<input name="pic" type="file" alt="kitty image" oninput={updatePic} />
+					<label for="pic" class="img-label">Custom focal picture (1:1 ideally)
+						<input class="img-input pointer" name="pic" id="pic" type="file" alt="kitty image" oninput={updatePic} />
+					</label>
 				</div>
 				<div class="bloc-seg-r">
-					<button onclick={resetPic}>Default</button>
+					<button onclick={resetPic} class="default-button">Default</button>
 				</div>
 			</div>
 			<div class="bg-img-bloc settings-bloc">
 				<div class="bloc-seg-l">
-					<label for="bg-img">Custom background image (16:19 ideally)</label>
-					<input name="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
+					<label for="bg-img" class="img-label">Custom background image (16:19 ideally)</label>
+					<input class="img-input pointer" name="bg-img" id="bg-img" type="file" alt="bg image" oninput={changeBgImg} />
 				</div>
 				<div class="bloc-seg-r">
-					<button onclick={resetBgImg}>Default</button>
+					<button onclick={resetBgImg} class="default-button">Default</button>
 				</div>
 			</div>
 			<div class="tint-bloc settings-bloc">
 				<div class="bloc-seg-l">
-					<input name="tint" type="checkbox" bind:checked={tempOverlay} />
-					<label for="tint">Image tint</label>
+					<input class="pointer" name="tint" id="tint" type="checkbox" bind:checked={tempOverlay} />
+					<label class="check-label" for="tint">Image tint</label>
 				</div>
 				<div class="bloc-seg-r">
-					<button onclick={() => {tempOverlay = true}}>Default</button>
+					<button onclick={() => {tempOverlay = true}} class="default-button">Default</button>
 				</div>
 			</div>
 			<div class="welcome-bloc settings-bloc">
 				<div class="bloc-seg-l">
 					<label for="welcome">Upper text: &nbsp</label>
-					<input name="welcome" type="text" bind:value={settings.welcome}
+					<input name="welcome" id="welcome" type="text" bind:value={settings.welcome}
 								 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
 				</div>
 				<div class="bloc-seg-r">
-					<button onclick={() => {settings.welcome = "お帰りなさい"}}>Default</button>
+					<button onclick={() => {settings.welcome = "お帰りなさい"}} class="default-button">Default</button>
 				</div>
 			</div>
 		</section>
@@ -186,8 +187,32 @@
                     flex-direction: row;
 
 										:global {
+												.bloc-seg-l {
+														& .check-label {
+															cursor: pointer;
+														}
+                            & .img-label {
+                                cursor: pointer;
+                            }
+														& .img-input {
+																margin-top: 15px;
+														}
+														& .img-input::-webkit-file-upload-button {
+                                display: none;
+                            }
+                            & .img-input::file-selector-button {
+                                display: none;
+                            }
+												}
                         .bloc-seg-r {
-                            margin-left: auto
+                            margin-left: auto;
+
+														& .default-button {
+																border-radius: 1px;
+																padding: 3px;
+																background-color: white;
+																cursor: pointer;
+														}
                         }
 										}
                 }

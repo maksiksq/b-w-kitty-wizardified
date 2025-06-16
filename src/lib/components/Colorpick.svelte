@@ -93,5 +93,5 @@
 	/>
 </div>
 <div class="bloc-seg-r">
-	<button onclick={() => {hsv=cssRgbaToHsv(defaultColors[value])}}>Default</button>
+	<button onclick={() => {hsv=cssRgbaToHsv(defaultColors[value])}} class="default-button">Default</button>
 </div>
