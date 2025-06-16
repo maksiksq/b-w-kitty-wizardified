@@ -1,7 +1,5 @@
 <script lang="ts">
 	let { values } = $props();
-
-	let inputType: string = $state('');
 </script>
 
 <div class="bloc-seg-l">

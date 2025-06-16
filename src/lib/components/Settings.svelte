@@ -11,6 +11,7 @@
 	import InputSetting from '$lib/components/Settings/TextSetting.svelte';
 	import TextSetting from '$lib/components/Settings/TextSetting.svelte';
 	import { onMount, tick } from 'svelte';
+	import Resolver from '$lib/components/Settings/Resolver.svelte';
 
 	let {
 		defaultColors,
@@ -71,39 +72,77 @@
 
 	//
 
+	let tempOverlay: boolean = $state(settings.overlay === 'true');
+	$effect((): any => settings.overlay = tempOverlay.toString());
+
 	let sData = $state({
-		pictures: [
+		background: [
 			{
-				name: 'pic',
-				label: 'Custom focal picture<br> (1:1 ideally, can be animated e.g. gif)',
-				alt: 'kitty image',
-				handler: updatePic,
-				reset: resetPic
+				type: 'color',
+				value: 'bg-color',
+				defaultColors: defaultColors,
+				isDarkColor: isDarkColor,
 			},
 			{
+				type: 'image',
 				name: 'bg-img',
-				label: 'Custom background image<br> (16:19 ideally, can be animated e.g. gif)',
+				label: 'Custom background image',
 				alt: 'bg image',
 				handler: changeBgImg,
 				reset: resetBgImg
 			}
 		],
-		checks: [
+		mainPic: [
 			{
+				type: 'image',
+				name: 'pic',
+				label: 'Custom main picture',
+				alt: 'kitty image',
+				handler: updatePic,
+				reset: resetPic
+			},
+			{
+				type: 'check',
 				name: 'tint',
-				label: 'Image tint'
+				label: 'Image tint',
+				checked: tempOverlay
 			}
+		],
+		theming: [
+			{
+				type: 'color',
+				value: 'text-color',
+				defaultColors: defaultColors,
+				isDarkColor: isDarkColor,
+			},
+			{
+				type: 'color',
+				value: 'accent-color',
+				defaultColors: defaultColors,
+				isDarkColor: isDarkColor,
+			},
+			{
+				type: 'color',
+				value: 'accent-color2',
+				defaultColors: defaultColors,
+				isDarkColor: isDarkColor,
+			},
+			{
+				type: 'color',
+				value: 'selection',
+				defaultColors: defaultColors,
+				isDarkColor: isDarkColor,
+			},
 		],
 		text: [
 			{
+				type: 'text',
 				name: 'welcome',
-				label: 'Upper text: &nbsp'
+				label: 'Upper text: &nbsp',
+				setting: settings.welcome
 			}
 		]
 	});
-
-	let tempOverlay: boolean = $state(settings.overlay === 'true');
-	$effect((): any => settings.overlay = tempOverlay.toString());
 
 	//
 
@@ -129,7 +168,7 @@
 	onMount(() => {
 		left = document.getElementsByClassName('settings-bloc-cont-l')[0];
 		right = document.getElementsByClassName('settings-bloc-cont-r')[0];
-		
+
 		tick().then(rebalance);
 	});
 
@@ -146,36 +185,51 @@
 				<div class="bloc-head">
 					<h3>Background</h3>
 					<p class="tiny-gray-text">
-						Images can be animated (e.g. gifs)
+						Images can be animated (e.g. gifs), ideally 16:9
 					</p>
 				</div>
-				{#each Object.keys(defaultColors) as value}
-					<div role="listitem" class="colorpick-bloc settings-bloc">
-						<Colorpick {defaultColors} {value} bind:isDarkColor />
+				{#each sData.background as values}
+					<div role="listitem" class="settings-bloc">
+						<Resolver {values} />
 					</div>
 				{/each}
 
 				<!-- Main picture-->
-				<h3>Main picture</h3>
-				{#each sData.pictures as values}
+				<div class="bloc-head">
+					<h3>Main picture</h3>
+					<p class="tiny-gray-text">
+						Images can be animated (e.g. gifs), ideally 1:1
+					</p>
+				</div>
+				{#each sData.mainPic as values}
 					<div role="listitem" class="img-bloc settings-bloc">
-						<Setting {values} />
+						<Resolver {values} />
 					</div>
 				{/each}
 
 				<!-- Colors-->
-				<h3>Theming</h3>
-				{#each sData.checks as values}
+				<div class="bloc-head">
+					<h3>Theming</h3>
+					<p class="tiny-gray-text">
+						Have fun
+					</p>
+				</div>
+				{#each sData.theming as values}
 					<div role="listitem" class="check-bloc settings-bloc">
-						<CheckSetting {values} bind:checked={tempOverlay} />
+						<Resolver {values} />
 					</div>
 				{/each}
 
 				<!-- Text-->
-				<h3>Text</h3>
+				<div class="bloc-head">
+					<h3>Text</h3>
+					<p class="tiny-gray-text">
+						Note that this might be the first thing you read in a day
+					</p>
+				</div>
 				{#each sData.text as values}
 					<div role="listitem" class="text-bloc settings-bloc">
-						<TextSetting {values} bind:setting={settings.welcome} />
+						<Resolver {values} />
 					</div>
 				{/each}
 
@@ -306,7 +360,7 @@
                     align-items: center;
                     justify-content: center;
 
-                    & li {
+                    & div {
                         & .editor-button {
                             all: unset;
 

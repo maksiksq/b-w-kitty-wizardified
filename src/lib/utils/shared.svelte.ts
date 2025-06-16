@@ -1,5 +1,4 @@
 // toggles
-
 export const showEditor = $state({
 	val: false
 })
@@ -9,7 +8,9 @@ export const showLightbox = $state({
 })
 
 // data transfer
-
 export const picSrc = $state({
 	val: ''
 })
+
+
+
