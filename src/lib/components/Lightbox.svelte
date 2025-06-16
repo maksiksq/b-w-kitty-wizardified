@@ -37,7 +37,6 @@
 
         background-color: rgba(46, 46, 46, 1);
 
-        transition: all 0.5s ease-in-out;
         border-radius: 0;
         z-index: 9999;
     }

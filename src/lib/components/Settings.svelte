@@ -10,7 +10,7 @@
 	import CheckSetting from '$lib/components/Settings/CheckSetting.svelte';
 	import InputSetting from '$lib/components/Settings/TextSetting.svelte';
 	import TextSetting from '$lib/components/Settings/TextSetting.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	let {
 		defaultColors,
@@ -112,13 +112,7 @@
 	let left: Element;
 	let right: Element;
 
-	onMount(() => {
-		left = document.getElementsByClassName('settings-bloc-cont-l')[0];
-		right = document.getElementsByClassName('settings-bloc-cont-r')[0];
-		rebalance();
-	});
-
-	function rebalance() {
+	const rebalance = (): void => {
 		console.log("hi")
 		while (left.scrollHeight > left.clientHeight && left.children.length) {
 			right.prepend(left.lastElementChild);
@@ -132,6 +126,14 @@
 		rebalance();
 	}
 
+	onMount(() => {
+		left = document.getElementsByClassName('settings-bloc-cont-l')[0];
+		right = document.getElementsByClassName('settings-bloc-cont-r')[0];
+		
+		tick().then(rebalance);
+	});
+
+
 </script>
 
 <svelte:window onresize={resize}></svelte:window>
@@ -139,46 +141,55 @@
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
 		<section class="settings-seg">
-			<ul class="settings-bloc-cont settings-bloc-cont-l">
-				<!-- colors-->
+			<div role="list" class="settings-bloc-cont settings-bloc-cont-l">
+				<!-- Background-->
+				<div class="bloc-head">
+					<h3>Background</h3>
+					<p class="tiny-gray-text">
+						Images can be animated (e.g. gifs)
+					</p>
+				</div>
 				{#each Object.keys(defaultColors) as value}
-					<li class="colorpick-bloc settings-bloc">
+					<div role="listitem" class="colorpick-bloc settings-bloc">
 						<Colorpick {defaultColors} {value} bind:isDarkColor />
-					</li>
+					</div>
 				{/each}
 
-				<!-- images-->
+				<!-- Main picture-->
+				<h3>Main picture</h3>
 				{#each sData.pictures as values}
-					<li class="img-bloc settings-bloc">
+					<div role="listitem" class="img-bloc settings-bloc">
 						<Setting {values} />
-					</li>
+					</div>
 				{/each}
 
-				<!-- checks-->
+				<!-- Colors-->
+				<h3>Theming</h3>
 				{#each sData.checks as values}
-					<li class="check-bloc settings-bloc">
+					<div role="listitem" class="check-bloc settings-bloc">
 						<CheckSetting {values} bind:checked={tempOverlay} />
-					</li>
+					</div>
 				{/each}
 
-				<!-- texts-->
+				<!-- Text-->
+				<h3>Text</h3>
 				{#each sData.text as values}
-					<li class="text-bloc settings-bloc">
+					<div role="listitem" class="text-bloc settings-bloc">
 						<TextSetting {values} bind:setting={settings.welcome} />
-					</li>
+					</div>
 				{/each}
 
-			</ul>
+			</div>
 			<ul class="settings-bloc-cont settings-bloc-cont-r"></ul>
 		</section>
 		<section class="editor-seg">
-			<ul class="editor-bloc-cont">
-				<li>
+			<div class="editor-bloc-cont">
+				<div>
 					<button class="editor-button" onclick={() => {switchToEditor()}}>
 						<Fa icon={fas['faPenToSquare']}></Fa>
 					</button>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</section>
 	</div>
 </div>
@@ -209,6 +220,7 @@
             pointer-events: auto;
 
             background-color: rgba(0, 0, 0, 0.25);
+						backdrop-filter: blur(3px);
 
             padding: 1.25vw;
             border-radius: 5px;
@@ -225,7 +237,7 @@
             --cp-button-hover-color: var(--accent-color);
 
             & .settings-seg {
-                width: 65%;
+                width: 70%;
 								height: 100%;
 
                 display: grid;
@@ -241,7 +253,7 @@
 								align-items: center;
 								justify-content: center;
 
-                width: 35%;
+                width: 30%;
             }
 
             & section {
@@ -320,4 +332,9 @@
         }
     }
 
+		.tiny-gray-text {
+				color: rgba(133, 133, 133, 0.8);
+				font-weight: bold;
+				font-size: 15px;
+		}
 </style>
