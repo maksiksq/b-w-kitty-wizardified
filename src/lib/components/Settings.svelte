@@ -240,7 +240,7 @@
 			<div class="editor-bloc-cont">
 				<div>
 					<button class="editor-button" onclick={() => {switchToEditor()}}>
-						<Fa icon={fas['faPenToSquare']}></Fa>
+						<Fa icon={fas['faPenToSquare']} color="white"></Fa>
 					</button>
 				</div>
 			</div>
