@@ -328,6 +328,12 @@
 
                     border-right: var(--accent-color2) solid 1px;
 
+										& .bloc-head {
+												& h3 {
+														color: white;
+												}
+										}
+
                     & .settings-bloc {
                         color: white;
 
