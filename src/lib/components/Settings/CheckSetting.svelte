@@ -11,7 +11,7 @@
 </div>
 
 <style>
-		.bloc-seg-l {
+    .bloc-seg-l {
         & .check-label {
             cursor: pointer;
         }
@@ -19,5 +19,5 @@
         & .check-input {
             cursor: pointer;
         }
-		}
+    }
 </style>

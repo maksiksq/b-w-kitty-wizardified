@@ -6,7 +6,6 @@
 
 	import { picSrc, showEditor } from '$lib/utils/shared.svelte.js';
 	import { showLightbox } from '$lib/utils/shared.svelte';
-	import Setting from '$lib/components/Settings/ImageSetting.svelte';
 	import CheckSetting from '$lib/components/Settings/CheckSetting.svelte';
 	import InputSetting from '$lib/components/Settings/TextSetting.svelte';
 	import TextSetting from '$lib/components/Settings/TextSetting.svelte';
@@ -72,8 +71,11 @@
 
 	//
 
-	let tempOverlay: boolean = $state(settings.overlay === 'true');
-	$effect((): any => settings.overlay = tempOverlay.toString());
+	let tempOverlay: string = $state(settings.overlay);
+	$effect((): any => settings.overlay = tempOverlay);
+
+	let tempWelcome: string = $state(settings.welcome);
+	$effect((): any => settings.welcome = sData.text[0].setting);
 
 	let sData = $state({
 		background: [
@@ -105,7 +107,6 @@
 				type: 'check',
 				name: 'tint',
 				label: 'Image tint',
-				checked: tempOverlay
 			}
 		],
 		theming: [
@@ -139,7 +140,7 @@
 				type: 'text',
 				name: 'welcome',
 				label: 'Upper text: &nbsp',
-				setting: settings.welcome
+				setting: tempWelcome
 			}
 		]
 	});
@@ -172,7 +173,8 @@
 		tick().then(rebalance);
 	});
 
-
+	$inspect('a1', tempOverlay);
+	$inspect('a2', settings.overlay);
 </script>
 
 <svelte:window onresize={resize}></svelte:window>
@@ -188,9 +190,9 @@
 						Images can be animated (e.g. gifs), ideally 16:9
 					</p>
 				</div>
-				{#each sData.background as values}
+				{#each sData.background as values, i}
 					<div role="listitem" class="settings-bloc">
-						<Resolver {values} />
+						<Resolver bind:values={sData.background[i]} />
 					</div>
 				{/each}
 
@@ -201,9 +203,9 @@
 						Images can be animated (e.g. gifs), ideally 1:1
 					</p>
 				</div>
-				{#each sData.mainPic as values}
+				{#each sData.mainPic as values, i}
 					<div role="listitem" class="img-bloc settings-bloc">
-						<Resolver {values} />
+						<Resolver bind:values={sData.mainPic[i]} bind:checked={tempOverlay}/>
 					</div>
 				{/each}
 
@@ -214,9 +216,9 @@
 						Have fun
 					</p>
 				</div>
-				{#each sData.theming as values}
+				{#each sData.theming as values, i}
 					<div role="listitem" class="check-bloc settings-bloc">
-						<Resolver {values} />
+						<Resolver bind:values={sData.theming[i]} />
 					</div>
 				{/each}
 
@@ -227,9 +229,9 @@
 						Note that this might be the first thing you read in a day
 					</p>
 				</div>
-				{#each sData.text as values}
+				{#each sData.text as values, i}
 					<div role="listitem" class="text-bloc settings-bloc">
-						<Resolver {values} />
+						<Resolver bind:values={sData.text[i]} />
 					</div>
 				{/each}
 

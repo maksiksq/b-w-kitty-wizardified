@@ -3,8 +3,6 @@
 
 	let { value, defaultColors, isDarkColor = $bindable() } = $props();
 
-	$inspect('hii');
-
 	type Trgba = {
 		r: number,
 		g: number,

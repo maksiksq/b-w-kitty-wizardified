@@ -5,10 +5,12 @@
 	import TextSetting from '$lib/components/Settings/TextSetting.svelte';
 
 	let {
-		values = undefined,
+		values = $bindable(undefined),
+		checked = $bindable(undefined),
 	} = $props();
 
-	$inspect(values);
+	$inspect('b', checked);
+
 </script>
 {#if (values.type === "color") }
 	<Colorpick defaultColors={values.defaultColors} value={values.value} bind:isDarkColor={values.isDarkColor} />
@@ -17,8 +19,8 @@
 	<ImageSetting {values} />
 {/if}
 {#if (values.type === "check") }
-	<CheckSetting {values} bind:checked={values.checked} />
+	<CheckSetting {values} bind:checked />
 {/if}
 {#if (values.type === "text") }
-	<TextSetting {values} bind:setting={values.setting} />
+	<TextSetting bind:values />
 {/if}
