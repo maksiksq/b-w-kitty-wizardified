@@ -60,8 +60,6 @@
 		'overlay': localStorage.getItem('s-overlay') || 'true'
 	});
 
-	$inspect('e', settings.overlay);
-
 	const onSettingsChange = (def: boolean, value: string): string => {
 		let r;
 		if (def) {

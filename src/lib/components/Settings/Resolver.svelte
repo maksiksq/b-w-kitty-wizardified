@@ -9,8 +9,6 @@
 		checked = $bindable(undefined),
 	} = $props();
 
-	$inspect('b', checked);
-
 </script>
 {#if (values.type === "color") }
 	<Colorpick defaultColors={values.defaultColors} value={values.value} bind:isDarkColor={values.isDarkColor} />

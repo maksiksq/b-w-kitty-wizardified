@@ -153,7 +153,8 @@
 	let right: Element;
 
 	const rebalance = (): void => {
-		console.log("hi")
+		if (!left.lastElementChild) return;
+
 		while (left.scrollHeight > left.clientHeight && left.children.length) {
 			right.prepend(left.lastElementChild);
 		}
@@ -172,9 +173,6 @@
 
 		tick().then(rebalance);
 	});
-
-	$inspect('a1', tempOverlay);
-	$inspect('a2', settings.overlay);
 </script>
 
 <svelte:window onresize={resize}></svelte:window>
@@ -315,10 +313,6 @@
             & section {
                 & ul {
                     all: unset;
-
-                    li {
-                        all: unset;
-                    }
                 }
 
                 & .settings-bloc-cont {

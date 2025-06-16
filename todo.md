@@ -14,4 +14,5 @@
 - [ ] sort settings in sections instead of type
 - [ ] make defaultColors follow standard maybe
 - [ ] setting thing swoosh sound
+- [ ] actually fix color picker y
 - [x] DEFAULT BUTTONS!!!!!111!1!!!!!11!!

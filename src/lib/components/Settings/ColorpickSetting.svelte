@@ -29,22 +29,15 @@
 		};
 	};
 
-	const rgbaArrToCssRgbaString = ({ r, g, b, a }: Trgba): string => `rgba(${r}, ${g}, ${b}, ${a})`;
+	const cssRgbaToHex = (str: string) => '#' + str.match(/\d+\.?\d*/g).map((v, i) => ('0' + (i < 3 ? +v : Math.round(v * 255)).toString(16)).slice(-2).toUpperCase()).join('');
+	const cssRgbaToRgbaObj = (str: string) => Object.fromEntries(str.match(/\d+\.?\d*/g).map((v, i) => [['r','g','b','a'][i], +v]));
+	const rgbaObjToCssRgbaString = ({ r, g, b, a }: Trgba): string => `rgba(${r}, ${g}, ${b}, ${a})`;
 
 	// const cssRgbaToRgbaToObj = (str: string) => ({r, g, b, a} = str.match(/\d+(\.\d+)?/g).reduce((o, v, i) => (['r','g','b','a'].forEach((k,j)=>i==j&&(o[k]=+v)), o), {}));
 
-	// the library only actually cares for the hsv value luckily for me
+	let hex = $state(cssRgbaToHex(localStorage.getItem(value) || defaultColors[value]));
 
-	let hex = $state(
-		'#000000'
-	);
-
-	let rgb = $state({
-		'r': 0,
-		'g': 0,
-		'b': 0,
-		'a': 1
-	});
+	let rgb = $state(cssRgbaToRgbaObj(localStorage.getItem(value) || defaultColors[value]));
 
 	let hsv = $state(cssRgbaToHsv(localStorage.getItem(value) || defaultColors[value]));
 
@@ -89,9 +82,16 @@
 		label={label}
 		sliderDirection="horizontal"
 		position="responsive"
-		onInput={() => { changeColor(value, rgbaArrToCssRgbaString(rgb)); }}
+		onInput={() => { changeColor(value, rgbaObjToCssRgbaString(rgb)); }}
 	/>
 </div>
 <div class="bloc-seg-r">
 	<button onclick={() => {hsv=cssRgbaToHsv(defaultColors[value])}} class="default-button">Default</button>
 </div>
+
+<style>
+	.bloc-seg-l {
+			/* hacky fix */
+			position: absolute;
+	}
+</style>
