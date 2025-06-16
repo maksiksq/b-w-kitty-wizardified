@@ -245,6 +245,14 @@
 						<Fa icon={fas['faPenToSquare']} color="white"></Fa>
 					</button>
 				</div>
+				<div class="data-seg">
+					<button class="save-button" onclick={() => {switchToEditor()}}>
+						<Fa icon={fas['faPenToSquare']} color="white"></Fa>
+					</button>
+					<button class="upload-button" onclick={() => {switchToEditor()}}>
+						<Fa icon={fas['faPenToSquare']} color="white"></Fa>
+					</button>
+				</div>
 			</div>
 		</section>
 	</div>

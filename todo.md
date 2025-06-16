@@ -15,4 +15,4 @@
 - [ ] make defaultColors follow standard maybe
 - [ ] setting thing swoosh sound
 - [ ] actually fix color picker y
-- [x] DEFAULT BUTTONS!!!!!111!1!!!!!11!!
+- [x] default buttons
