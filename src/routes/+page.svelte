@@ -126,6 +126,10 @@
 
         & .pic-cover {
             & img {
+								user-select: none;
+								/* overriden on drag */
+								pointer-events: none;
+
                 position: relative;
                 height: 29.4vw;
                 width: 29.4vw;

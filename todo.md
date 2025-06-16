@@ -10,4 +10,6 @@
 - [ ] maybe remake settings to look cooler and actually be generated properly
 - [ ] make selecting an image disable the bg color settings
 - [ ] custom selection color (why?)
+- [ ] fact of the day
+- [ ] sort settings in sections instead of type
 - [x] DEFAULT BUTTONS!!!!!111!1!!!!!11!!

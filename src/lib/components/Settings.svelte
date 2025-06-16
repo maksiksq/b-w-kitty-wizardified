@@ -6,16 +6,16 @@
 
 	import { picSrc, showEditor } from '$lib/utils/shared.svelte.js';
 	import { showLightbox } from '$lib/utils/shared.svelte';
-	import Setting from '$lib/components/Settings/Setting.svelte';
+	import Setting from '$lib/components/Settings/ImageSetting.svelte';
+	import CheckSetting from '$lib/components/Settings/CheckSetting.svelte';
+	import InputSetting from '$lib/components/Settings/TextSetting.svelte';
+	import TextSetting from '$lib/components/Settings/TextSetting.svelte';
 
 	let {
 		defaultColors,
 		isDarkColor = $bindable(false),
 		settings = $bindable(undefined)
 	} = $props();
-
-	let tempOverlay: boolean = $state(settings.overlay === 'true');
-	$effect((): any => settings.overlay = tempOverlay.toString());
 
 	const switchToEditor = (): void => {
 		showEditor.val = !showEditor.val;
@@ -68,29 +68,46 @@
 		localStorage.setItem('bg-img', '');
 	};
 
+	//
+
 	let sData = $state({
 		pictures: [
 			{
 				name: 'pic',
-				label: 'Custom focal picture (1:1 ideally)',
+				label: 'Custom focal picture<br> (1:1 ideally, can be animated e.g. gif)',
 				alt: 'kitty image',
 				handler: updatePic,
 				reset: resetPic
 			},
 			{
 				name: 'bg-img',
-				label: 'Custom background image (16:19 ideally)',
+				label: 'Custom background image<br> (16:19 ideally, can be animated e.g. gif)',
 				alt: 'bg image',
 				handler: changeBgImg,
 				reset: resetBgImg
 			}
+		],
+		checks: [
+			{
+				name: 'tint',
+				label: 'Image tint'
+			}
+		],
+		text: [
+			{
+				name: 'welcome',
+				label: 'Upper text: &nbsp'
+			}
 		]
 	});
+
+	let tempOverlay: boolean = $state(settings.overlay === 'true');
+	$effect((): any => settings.overlay = tempOverlay.toString());
 </script>
 
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
-		<section>
+		<section class="settings-seg">
 			<ul class="settings-bloc-cont">
 				<!-- colors-->
 				{#each Object.keys(defaultColors) as value}
@@ -98,36 +115,31 @@
 						<Colorpick {defaultColors} {value} bind:isDarkColor />
 					</li>
 				{/each}
+
 				<!-- images-->
 				{#each sData.pictures as values}
 					<li class="img-bloc settings-bloc">
-						<Setting values={values} />
+						<Setting {values} />
 					</li>
 				{/each}
+
 				<!-- checks-->
-				<li class="tint-bloc settings-bloc">
-					<div class="bloc-seg-l">
-						<input class="pointer" name="tint" id="tint" type="checkbox" bind:checked={tempOverlay} />
-						<label class="check-label" for="tint">Image tint</label>
-					</div>
-					<div class="bloc-seg-r">
-						<button onclick={() => {tempOverlay = true}} class="default-button">Default</button>
-					</div>
-				</li>
+				{#each sData.checks as values}
+					<li class="check-bloc settings-bloc">
+						<CheckSetting {values} bind:checked={tempOverlay} />
+					</li>
+				{/each}
+
 				<!-- texts-->
-				<li class="welcome-bloc settings-bloc">
-					<div class="bloc-seg-l">
-						<label for="welcome">Upper text: &nbsp</label>
-						<input name="welcome" id="welcome" type="text" bind:value={settings.welcome}
-									 onkeydown={(e) => {e.key === 'Enter' ? showLightbox.val=false : ''}} />
-					</div>
-					<div class="bloc-seg-r">
-						<button onclick={() => {settings.welcome = "お帰りなさい"}} class="default-button">Default</button>
-					</div>
-				</li>
+				{#each sData.text as values}
+					<li class="text-bloc settings-bloc">
+						<TextSetting {values} bind:setting={settings.welcome} />
+					</li>
+				{/each}
+
 			</ul>
 		</section>
-		<section>
+		<section class="editor-seg">
 			<ul class="editor-bloc-cont">
 				<li>
 					<button class="editor-button" onclick={() => {switchToEditor()}}>
@@ -182,9 +194,15 @@
             --cp-input-color: var(--accent-color);
             --cp-button-hover-color: var(--accent-color);
 
-            & section {
-                width: 50%;
+            & .settings-seg {
+                width: 55%;
+            }
 
+            & .editor-seg {
+                width: 45%;
+            }
+
+            & section {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -214,28 +232,6 @@
                         flex-direction: row;
 
                         :global {
-                            .bloc-seg-l {
-                                & .check-label {
-                                    cursor: pointer;
-                                }
-
-                                & .img-label {
-                                    cursor: pointer;
-                                }
-
-                                & .img-input {
-                                    margin-top: 15px;
-                                }
-
-                                & .img-input::-webkit-file-upload-button {
-                                    display: none;
-                                }
-
-                                & .img-input::file-selector-button {
-                                    display: none;
-                                }
-                            }
-
                             .bloc-seg-r {
                                 margin-left: auto;
 
