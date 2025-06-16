@@ -10,5 +10,4 @@
 - [ ] maybe remake settings to look cooler and actually be generated properly
 - [ ] make selecting an image disable the bg color settings
 - [ ] custom selection color (why?)
-
-!!! [x] DEFAULT BUTTONS!!!!!111!1!!!!!11!!
+- [x] DEFAULT BUTTONS!!!!!111!1!!!!!11!!
