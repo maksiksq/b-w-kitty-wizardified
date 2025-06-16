@@ -10,6 +10,7 @@
 	import CheckSetting from '$lib/components/Settings/CheckSetting.svelte';
 	import InputSetting from '$lib/components/Settings/TextSetting.svelte';
 	import TextSetting from '$lib/components/Settings/TextSetting.svelte';
+	import { onMount } from 'svelte';
 
 	let {
 		defaultColors,
@@ -103,12 +104,42 @@
 
 	let tempOverlay: boolean = $state(settings.overlay === 'true');
 	$effect((): any => settings.overlay = tempOverlay.toString());
+
+	//
+
+	// section sorter (why doesn't css just have this??)
+
+	let left: Element;
+	let right: Element;
+
+	onMount(() => {
+		left = document.getElementsByClassName('settings-bloc-cont-l')[0];
+		right = document.getElementsByClassName('settings-bloc-cont-r')[0];
+		rebalance();
+	});
+
+	function rebalance() {
+		console.log("hi")
+		while (left.scrollHeight > left.clientHeight && left.children.length) {
+			right.prepend(left.lastElementChild);
+		}
+	}
+
+	const resize = (): void => {
+		while (right.children.length) {
+			left.append(right.firstElementChild);
+		}
+		rebalance();
+	}
+
 </script>
+
+<svelte:window onresize={resize}></svelte:window>
 
 <div class="settings-wrap">
 	<div class="settings-wrap-inner">
 		<section class="settings-seg">
-			<ul class="settings-bloc-cont">
+			<ul class="settings-bloc-cont settings-bloc-cont-l">
 				<!-- colors-->
 				{#each Object.keys(defaultColors) as value}
 					<li class="colorpick-bloc settings-bloc">
@@ -138,6 +169,7 @@
 				{/each}
 
 			</ul>
+			<ul class="settings-bloc-cont settings-bloc-cont-r"></ul>
 		</section>
 		<section class="editor-seg">
 			<ul class="editor-bloc-cont">
@@ -148,10 +180,8 @@
 				</li>
 			</ul>
 		</section>
-
 	</div>
 </div>
-
 
 <style>
     .settings-wrap {
@@ -172,8 +202,8 @@
         justify-content: center;
 
         & .settings-wrap-inner {
-            width: 50vw;
-            height: 60vh;
+            width: 80vw;
+            height: 80vh;
 
             user-select: none;
             pointer-events: auto;
@@ -195,19 +225,26 @@
             --cp-button-hover-color: var(--accent-color);
 
             & .settings-seg {
-                width: 55%;
+                width: 65%;
+								height: 100%;
+
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2vw;
+                padding: 1rem;
+                box-sizing: border-box;
             }
 
             & .editor-seg {
-                width: 45%;
+								display: flex;
+								flex-direction: column;
+								align-items: center;
+								justify-content: center;
+
+                width: 35%;
             }
 
             & section {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-
                 & ul {
                     all: unset;
 
@@ -217,9 +254,13 @@
                 }
 
                 & .settings-bloc-cont {
-                    display: flex;
-                    flex-direction: column;
+										width: 100%;
+										height: 100%;
+
+										display: flex;
+										flex-direction: column;
                     gap: 1vw;
+										overflow-y: auto;
 
                     padding-right: 1vw;
 

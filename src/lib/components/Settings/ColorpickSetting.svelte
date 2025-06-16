@@ -66,7 +66,8 @@
 			value === 'text-color' ? 'Text color' :
 				value === 'accent-color' ? 'Main accent color' :
 					value === 'accent-color2' ? 'Secondary accent color' :
-						'why';
+						value === 'selection' ? 'Text selection color (why?)' :
+							'why';
 
 	//
 

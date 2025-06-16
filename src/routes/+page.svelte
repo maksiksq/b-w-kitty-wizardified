@@ -24,7 +24,13 @@
 		'bg-color': 'rgba(46,46,46,1)',
 		'text-color': 'rgba(230,230,230,1)',
 		'accent-color': 'rgba(50,200,150,0.3)',
-		'accent-color2': 'rgba(200, 50, 50, 0.3)'
+		'accent-color2': 'rgba(200, 50, 50, 0.3)',
+		'selection': 'rgba(138,2,181,1)',
+		'selection2': 'rgba(138,2,181,1)',
+		'selection4': 'rgba(138,2,181,1)',
+		'selection5': 'rgba(138,2,181,1)',
+		'selection7': 'rgba(138,2,181,1)',
+
 	};
 
 	let root = document.documentElement;

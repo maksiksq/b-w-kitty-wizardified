@@ -7,9 +7,11 @@
 - [ ] replace some effects with oninputs and universalate some things
 - [ ] add image upscaling and transparency options
 - [ ] settings button should be draggable too
-- [ ] maybe remake settings to look cooler and actually be generated properly
+- [x] maybe remake settings to look cooler and actually be generated properly
 - [ ] make selecting an image disable the bg color settings
 - [ ] custom selection color (why?)
 - [ ] fact of the day
 - [ ] sort settings in sections instead of type
+- [ ] make defaultColors follow standard maybe
+- [ ] setting thing swoosh sound
 - [x] DEFAULT BUTTONS!!!!!111!1!!!!!11!!
