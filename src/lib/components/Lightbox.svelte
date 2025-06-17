@@ -1,4 +1,5 @@
 <script lang="ts">
+	// @ts-ignore
 	import Fa from 'svelte-fa';
 
 	import { faPaintRoller, faTimes } from '@fortawesome/free-solid-svg-icons';
