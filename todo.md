@@ -1,6 +1,7 @@
 - [ ] make icon color a selectable or auto
 - [ ] editor mode hangables (including individual image editing)
 - [ ] editor mode saving
+- [ ] shock
 - [x] image backgrounds
 - [ ] save and load settings
 - [ ] text selection color option
@@ -16,3 +17,4 @@
 - [ ] setting thing swoosh sound
 - [ ] actually fix color picker y
 - [x] default buttons
+- [ ] per day loadouts

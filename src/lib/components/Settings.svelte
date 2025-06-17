@@ -6,9 +6,6 @@
 
 	import { picSrc, showEditor } from '$lib/utils/shared.svelte.js';
 	import { showLightbox } from '$lib/utils/shared.svelte';
-	import CheckSetting from '$lib/components/Settings/CheckSetting.svelte';
-	import InputSetting from '$lib/components/Settings/TextSetting.svelte';
-	import TextSetting from '$lib/components/Settings/TextSetting.svelte';
 	import { onMount, tick } from 'svelte';
 	import Resolver from '$lib/components/Settings/Resolver.svelte';
 
@@ -83,7 +80,7 @@
 				type: 'color',
 				value: 'bg-color',
 				defaultColors: defaultColors,
-				isDarkColor: isDarkColor,
+				isDarkColor: isDarkColor
 			},
 			{
 				type: 'image',
@@ -106,7 +103,7 @@
 			{
 				type: 'check',
 				name: 'tint',
-				label: 'Image tint',
+				label: 'Image tint'
 			}
 		],
 		theming: [
@@ -114,26 +111,26 @@
 				type: 'color',
 				value: 'text-color',
 				defaultColors: defaultColors,
-				isDarkColor: isDarkColor,
+				isDarkColor: isDarkColor
 			},
 			{
 				type: 'color',
 				value: 'accent-color',
 				defaultColors: defaultColors,
-				isDarkColor: isDarkColor,
+				isDarkColor: isDarkColor
 			},
 			{
 				type: 'color',
 				value: 'accent-color2',
 				defaultColors: defaultColors,
-				isDarkColor: isDarkColor,
+				isDarkColor: isDarkColor
 			},
 			{
 				type: 'color',
 				value: 'selection',
 				defaultColors: defaultColors,
-				isDarkColor: isDarkColor,
-			},
+				isDarkColor: isDarkColor
+			}
 		],
 		text: [
 			{
@@ -158,14 +155,14 @@
 		while (left.scrollHeight > left.clientHeight && left.children.length) {
 			right.prepend(left.lastElementChild);
 		}
-	}
+	};
 
 	const resize = (): void => {
 		while (right.children.length) {
 			left.append(right.firstElementChild);
 		}
 		rebalance();
-	}
+	};
 
 	onMount(() => {
 		left = document.getElementsByClassName('settings-bloc-cont-l')[0];
@@ -203,7 +200,7 @@
 				</div>
 				{#each sData.mainPic as values, i}
 					<div role="listitem" class="img-bloc settings-bloc">
-						<Resolver bind:values={sData.mainPic[i]} bind:checked={tempOverlay}/>
+						<Resolver bind:values={sData.mainPic[i]} bind:checked={tempOverlay} />
 					</div>
 				{/each}
 
@@ -246,6 +243,16 @@
 					</button>
 				</div>
 			</div>
+			<div class="upload-bloc-cont">
+				<div>
+					<button class="save-button u-button" onclick={() => {switchToEditor()}}>
+						<Fa icon={fas['faPenToSquare']} color="white"></Fa>
+					</button>
+					<button class="upload-button u-button" onclick={() => {switchToEditor()}}>
+						<Fa icon={fas['faPenToSquare']} color="white"></Fa>
+					</button>
+				</div>
+			</div>
 		</section>
 	</div>
 </div>
@@ -276,7 +283,7 @@
             pointer-events: auto;
 
             background-color: rgba(0, 0, 0, 0.25);
-						backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
 
             padding: 1.25vw;
             border-radius: 5px;
@@ -294,7 +301,7 @@
 
             & .settings-seg {
                 width: 70%;
-								height: 100%;
+                height: 100%;
 
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -304,10 +311,10 @@
             }
 
             & .editor-seg {
-								display: flex;
-								flex-direction: column;
-								align-items: center;
-								justify-content: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
 
                 width: 30%;
             }
@@ -318,23 +325,23 @@
                 }
 
                 & .settings-bloc-cont {
-										width: 100%;
-										height: 100%;
+                    width: 100%;
+                    height: 100%;
 
-										display: flex;
-										flex-direction: column;
+                    display: flex;
+                    flex-direction: column;
                     gap: 1vw;
-										overflow-y: auto;
+                    overflow-y: auto;
 
                     padding-right: 1vw;
 
                     border-right: var(--accent-color2) solid 1px;
 
-										& .bloc-head {
-												& h3 {
-														color: white;
-												}
-										}
+                    & .bloc-head {
+                        & h3 {
+                            color: white;
+                        }
+                    }
 
                     & .settings-bloc {
                         color: white;
@@ -390,9 +397,9 @@
         }
     }
 
-		.tiny-gray-text {
-				color: rgba(133, 133, 133, 0.8);
-				font-weight: bold;
-				font-size: 15px;
-		}
+    .tiny-gray-text {
+        color: rgba(133, 133, 133, 0.8);
+        font-weight: bold;
+        font-size: 15px;
+    }
 </style>
