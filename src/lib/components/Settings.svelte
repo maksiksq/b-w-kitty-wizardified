@@ -142,8 +142,6 @@
 		]
 	});
 
-	//
-
 	// section sorter (why doesn't css just have this??)
 
 	let left: Element;
@@ -256,7 +254,6 @@
 		</section>
 	</div>
 </div>
-
 <style>
     .settings-wrap {
         position: absolute;
